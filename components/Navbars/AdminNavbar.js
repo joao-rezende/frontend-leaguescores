@@ -20,7 +20,7 @@ export default function Navbar({ titlePage }) {
           {/* Brand */}
           <a
             className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
-            href="#pablo"
+            href="#"
             onClick={(e) => e.preventDefault()}
           >
             {titlePage}

@@ -5,13 +5,14 @@ import React from "react";
 // layout for page
 import Admin from "layouts/Admin.js";
 import CardTable from "components/Cards/CardTable";
+import { withIronSession } from "next-iron-session";
 
-export default function Dashboard() {
+const Dashboard = ({ user }) => {
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-800 border-0">
         <div className="px-4 py-5">
-          <p className="relative text-white">Olá!</p>
+          <p className="relative text-white">Olá, {user && user.name ? user.email : ""}!</p>
         </div>
       </div>
 
@@ -39,6 +40,25 @@ export default function Dashboard() {
     </>
   );
 }
+
+export const getServerSideProps = withIronSession(
+  async ({ req, res }) => {
+    const user = req.session.get("user");
+
+    if (!user || user.length == 0) {
+      res.writeHead(302, { Location: '/' });
+      res.end();
+      return { props: {} };
+    }
+
+    return {
+      props: { user }
+    };
+  },
+  process.env.CONFIGCOOKIE
+);
+
+export default Dashboard;
 
 Dashboard.layout = Admin;
 Dashboard.titlePage = "Usuários";

@@ -3,8 +3,6 @@ import { useRouter } from "next/router";
 
 // layout for page
 import Auth from "layouts/Auth.js";
-import IdleTimer from "helpers/IdleTimer";
-
 export default function Login() {
   const router = useRouter();
   const [errorMsg, setErrorMsg] = useState('');
@@ -13,29 +11,22 @@ export default function Login() {
     event.preventDefault();
     setErrorMsg('');
 
-    const res = await fetch(
-      `${process.env.apiHost}/login`,
-      {
-        body: JSON.stringify({
-          email: event.target.email.value,
-          password: event.target.password.value
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        mode: 'cors',
-      }
-    )
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    const rememberMe = event.target.rememberMe.checked;
 
-    const result = await res.json();
+    const res_json = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password, rememberMe })
+    });
 
-    if (!result.result) {
-      setErrorMsg(result.message);
+    const res = await res_json.json();
+
+    if (!res.result) {
+      setErrorMsg(res.message);
       return false;
     }
-
-    sessionStorage.setItem("user", result.user.idUser);
 
     router.push("/admin");
     return true;
@@ -90,6 +81,8 @@ export default function Login() {
                       <input
                         id="customCheckLogin"
                         type="checkbox"
+                        name="rememberMe"
+                        value="true"
                         className="form-checkbox border-0 rounded text-emerald-700 w-5 h-5 ease-linear transition-all duration-150"
                       />
                       <span className="ml-2 text-sm font-semibold text-white">
@@ -109,7 +102,7 @@ export default function Login() {
                   </div>
                   <div className="w-full text-center mt-5">
                     <a
-                      href="#pablo"
+                      href="#"
                       onClick={(e) => e.preventDefault()}
                       className="text-emerald-400"
                     >

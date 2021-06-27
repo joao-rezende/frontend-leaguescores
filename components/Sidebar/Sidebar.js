@@ -25,7 +25,7 @@ export default function Sidebar() {
           {/* Brand */}
           <Link href="/">
             <a
-              href="#pablo"
+              href="#"
               className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             >
               Notus NextJS
@@ -53,7 +53,7 @@ export default function Sidebar() {
                 <div className="w-6/12">
                   <Link href="/">
                     <a
-                      href="#pablo"
+                      href="#"
                       className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                     >
                       Notus NextJS
@@ -90,7 +90,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link href="/admin">
                   <a
-                    href="#pablo"
+                    href="#"
                     className={
                       "text-xs py-2 block px-3 font-medium " +
                       (router.pathname.indexOf("/admin") !== -1 && router.pathname.substr(6, router.pathname.length).length <= 1
@@ -107,7 +107,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link href="/admin/analysis">
                   <a
-                    href="#pablo"
+                    href="#"
                     className={
                       "text-xs py-2 block px-3 font-medium " +
                       (router.pathname.indexOf("/admin/analysis") !== -1
@@ -124,7 +124,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link href="/admin/tables">
                   <a
-                    href="#pablo"
+                    href="#"
                     className={
                       "text-xs py-2 block px-3 font-medium " +
                       (router.pathname.indexOf("/admin/tables") !== -1
@@ -141,7 +141,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link href="/admin/maps">
                   <a
-                    href="#pablo"
+                    href="#"
                     className={
                       "text-xs py-2 block px-3 font-medium " +
                       (router.pathname.indexOf("/admin/maps") !== -1

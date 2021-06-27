@@ -28,3 +28,5 @@ out/
 commit.sh
 
 .vscode/
+
+next.config.js

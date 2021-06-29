@@ -1,4 +1,4 @@
-import { applySession, withIronSession } from "next-iron-session";
+import { applySession } from "next-iron-session";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(404).send("");
@@ -24,7 +24,7 @@ export default async function handler(req, res) {
   }
 
   const configCookie = process.env.CONFIGCOOKIE;
-  configCookie.cookieOptions.maxAge = rememberMe ? 109500 : 2400;
+  configCookie.cookieOptions.maxAge = rememberMe ? 157680000 : 2400;
   await applySession(req, res, configCookie);
   
   req.session.set("user", res_validation.user);

@@ -1289,17 +1289,17 @@ select {
   background-color: rgba(52, 211, 153, var(--tw-bg-opacity));
 }
 
-.bg-emerald-500, .hover\:.bg-emerald-500:hover {
+.bg-emerald-500, .hover\:bg-emerald-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(5, 150, 105, var(--tw-bg-opacity));
 }
 
-.bg-emerald-600, .hover\:.bg-emerald-600:hover {
+.bg-emerald-600, .hover\:bg-emerald-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(16, 185, 129, var(--tw-bg-opacity));
 }
 
-.bg-emerald-700, .hover\:.bg-emerald-700:hover {
+.bg-emerald-700, .hover\:bg-emerald-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(4, 120, 87, var(--tw-bg-opacity));
 }
@@ -2780,6 +2780,12 @@ select {
   padding-bottom: 0.5rem;
 }
 
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -3914,6 +3920,10 @@ select {
 
   .sm\:pt-0 {
     padding-top: 0px;
+  }
+
+  .sm\:pt-20 {
+    padding-top: 5rem;
   }
 
   .sm\:w-6\/12 {

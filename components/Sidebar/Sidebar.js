@@ -34,9 +34,6 @@ export default function Sidebar() {
           {/* User */}
           <ul className="md:hidden items-center flex flex-wrap list-none">
             <li className="inline-block relative">
-              <NotificationDropdown />
-            </li>
-            <li className="inline-block relative">
               <UserDropdown />
             </li>
           </ul>
@@ -93,7 +90,7 @@ export default function Sidebar() {
                     href="#"
                     className={
                       "text-xs py-2 block px-3 font-medium " +
-                      (router.pathname.indexOf("/admin") !== -1 && router.pathname.substr(6, router.pathname.length).length <= 1
+                      (router.pathname.indexOf("/admin/users") !== -1
                         ? "bg-emerald-800 bg-opacity-30 text-emerald-500 hover:bg-emerald-600 rounded-md"
                         : "text-gray-600 hover:text-gray-400")
                     }

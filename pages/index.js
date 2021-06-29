@@ -28,7 +28,7 @@ export default function Login() {
       return false;
     }
 
-    router.push("/admin");
+    router.push("/admin/users");
     return true;
   }
 

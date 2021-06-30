@@ -1,3 +1,4 @@
+import { Link } from "components/Links/Link";
 import React from "react";
 
 // components
@@ -32,15 +33,15 @@ export default function LineUser({ data, color }) {
         {formatDate(data.creationDate)}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-        <button className={"background-transparent font-bold uppercase px-1 py-1 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"}>
+        <Link href={`/admin/users/edit/${data.idUser}`} className={"background-transparent font-bold uppercase px-1 py-1 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"}>
           <i className="text-emerald-400 fas fa-edit"></i> Editar
-        </button>
-        <button className={"background-transparent font-bold uppercase px-1 py-1 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"}>
+        </Link>
+        <Link href="#" className={"background-transparent font-bold uppercase px-1 py-1 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"}>
           <i className="text-red-500 fas fa-ban"></i> Inativar
-        </button>
-        <button className={"background-transparent font-bold uppercase px-1 py-1 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"}>
+        </Link>
+        <Link href="#" className={"background-transparent font-bold uppercase px-1 py-1 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"}>
           <i className="text-lightBlue-500 fas fa-sign-in-alt"></i> Acessar
-        </button>
+        </Link>
       </td>
     </tr>
   );

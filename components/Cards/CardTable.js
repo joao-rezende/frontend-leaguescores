@@ -34,9 +34,9 @@ export default function CardTable({ color, titleTable, columns, lines, Line }) {
           <table className="items-center w-full bg-transparent border-collapse">
             <thead>
               <tr>
-                {columns.map((column) => (
+                {columns.map((column, key) => (
                   <th
-                    className={
+                    key={key} className={
                       "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                       (color === "light"
                         ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
@@ -49,8 +49,8 @@ export default function CardTable({ color, titleTable, columns, lines, Line }) {
               </tr>
             </thead>
             <tbody>
-              {lines.map((line) => (
-                <Line data={line} color={color} />
+              {lines.map((line, key) => (
+                <Line key={key} data={line} color={color} />
               ))}
             </tbody>
           </table>

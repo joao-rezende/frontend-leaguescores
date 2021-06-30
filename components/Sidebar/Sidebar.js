@@ -85,7 +85,7 @@ export default function Sidebar() {
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none sidebar">
               <li className="items-center">
-                <Link href="/admin">
+                <Link href="/admin/users">
                   <a
                     href="#"
                     className={

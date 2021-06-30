@@ -5,6 +5,7 @@ import React, { createContext, useReducer } from "react";
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import FooterSmall from "components/Footers/FooterSmall.js";
+import Link from "next/link";
 
 export const AdminContext = createContext();
 

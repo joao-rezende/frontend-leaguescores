@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createPopper } from "@popperjs/core";
-import { useRouter } from 'next/router';
+import { AuthContext } from "../../contexts/AuthContext";
 
 const UserDropdown = () => {
   // dropdown props
-  const router = useRouter();
+  const { signOut } = useContext(AuthContext);
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
@@ -18,13 +18,9 @@ const UserDropdown = () => {
     setDropdownPopoverShow(false);
   };
 
-  const logout = async () => {
-    await fetch("/api/logout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" }
-    });
-    router.push("/"); 
-  };
+  async function handleSignOut() {
+    await signOut();
+  }
 
   return (
     <>
@@ -38,7 +34,7 @@ const UserDropdown = () => {
         }}
       >
         <div className="items-center flex">
-          <span className="w-12 h-12 text-sm text-emerald-500 bg-gray-700 shadow-lg inline-flex items-center justify-center rounded-full">
+          <span className="w-12 h-12 text-sm text-emerald-200 bg-gray-700 shadow-lg inline-flex items-center justify-center rounded-full">
             <i className="fas fa-user rounded-full align-middle border-none shadow-lg icon-user"></i>
           </span>
         </div>
@@ -83,7 +79,7 @@ const UserDropdown = () => {
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
-          onClick={logout}
+          onClick={handleSignOut}
         >
           Sair
         </a>

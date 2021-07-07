@@ -2,8 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
-import UserDropdown from "components/Dropdowns/UserDropdown.js";
+import UserDropdown from "../Dropdowns/UserDropdown";
 
 export default function Sidebar() {
 
@@ -26,9 +25,9 @@ export default function Sidebar() {
           <Link href="/">
             <a
               href="#"
-              className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
+              className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm font-bold p-4 px-0"
             >
-              Notus NextJS
+              LeagueScores
             </a>
           </Link>
           {/* User */}
@@ -84,6 +83,23 @@ export default function Sidebar() {
             {/* Navigation */}
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none sidebar">
+              <li className="items-center">
+                <Link href="/admin/home">
+                  <a
+                    href="#"
+                    className={
+                      "text-xs py-2 block px-3 font-medium " +
+                      (router.pathname.indexOf("/admin/home") !== -1
+                        ? "bg-emerald-800 bg-opacity-30 text-emerald-500 hover:bg-emerald-600 rounded-md"
+                        : "text-gray-600 hover:text-gray-400")
+                    }
+                  >
+                    <i className={"fas fa-home mr-4 text-lg"}></i>{" "}
+                    <span className={"text-sidebar"}>Início</span>
+                  </a>
+                </Link>
+              </li>
+
               <li className="items-center">
                 <Link href="/admin/users">
                   <a

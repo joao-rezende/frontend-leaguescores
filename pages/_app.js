@@ -1,15 +1,15 @@
-
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "next/app";
 import Head from "next/head";
 import Router from "next/router";
 
-import PageChange from "components/PageChange/PageChange.js";
+import PageChange from "../components/PageChange/PageChange";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import "styles/tailwind.css";
-import "styles/index.css";
+import "../styles/tailwind.css";
+import "../styles/index.css";
+import { AuthProvider } from "../contexts/AuthContext";
 
 Router.events.on("routeChangeStart", (url) => {
   document.body.classList.add("body-page-transition");
@@ -43,20 +43,20 @@ export default class MyApp extends App {
     const Layout = Component.layout || (({ children }) => <>{children}</>);
 
     return (
-      <>
       <React.Fragment>
         <Head>
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
-          <title>Curso Thiago</title>
+          <title>LeagueScores</title>
         </Head>
-        <Layout titlePage={Component.titlePage ?? ""}>
-          <Component {...pageProps} />
-        </Layout>
+        <AuthProvider>
+          <Layout titlePage={Component.titlePage ?? ""}>
+            <Component {...pageProps} />
+          </Layout>
+        </AuthProvider>
       </React.Fragment>
-      </>
     );
   }
 }

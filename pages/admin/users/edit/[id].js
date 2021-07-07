@@ -1,5 +1,5 @@
-import { Form } from "components/Users/Form";
-import Admin from "layouts/Admin";
+import { FormUser } from "../../../../components/Forms/FormUser";
+import Admin from "../../../../layouts/Admin";
 
 export async function getStaticPaths() {
   // Call an external API endpoint to get users
@@ -8,7 +8,7 @@ export async function getStaticPaths() {
 
   // Get the paths we want to pre-render based on users
   const paths = users.map((user) => ({
-    params: { id: user.idUser },
+    params: { id: user.userID },
   }))
 
   // We'll pre-render only these paths at build time.
@@ -27,7 +27,7 @@ export async function getStaticProps({ params }) {
   return { props: { user } }
 }
 
-export default Form;
+export default FormUser;
 
-Form.layout = Admin;
-Form.titlePage = "Editar Usuários";
+FormUser.layout = Admin;
+FormUser.titlePage = "Editar Usuários";

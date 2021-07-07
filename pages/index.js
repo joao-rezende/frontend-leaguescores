@@ -1,35 +1,17 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
+import React, { useContext } from "react";
+import { useForm } from 'react-hook-form';
 
 // layout for page
-import Auth from "layouts/Auth.js";
+
+import Auth from "../layouts/Auth";
+import { AuthContext } from "../contexts/AuthContext";
+
 export default function Login() {
-  const router = useRouter();
-  const [errorMsg, setErrorMsg] = useState('');
+  const { register, handleSubmit } = useForm();
+  const { error, signIn } = useContext(AuthContext);
 
-  const login = async event => {
-    event.preventDefault();
-    setErrorMsg('');
-
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    const rememberMe = event.target.rememberMe.checked;
-
-    const res_json = await fetch("/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password, rememberMe })
-    });
-
-    const res = await res_json.json();
-
-    if (!res.result) {
-      setErrorMsg(res.message);
-      return false;
-    }
-
-    router.push("/admin/users");
-    return true;
+  async function handleSingIn(data) {
+    await signIn(data);
   }
 
   return (
@@ -44,7 +26,7 @@ export default function Login() {
                 </div>
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                <form onSubmit={login}>
+                <form onSubmit={handleSubmit(handleSingIn)}>
                   <div className="relative w-full mb-4">
                     <label
                       className="block uppercase text-white text-xs font-bold mb-1"
@@ -53,7 +35,7 @@ export default function Login() {
                       E-mail
                     </label>
                     <input
-                      id="email-login"
+                      {...register('email')}
                       name="email"
                       type="email"
                       className="border-0 px-3 py-3 placeholder-blueGray-500 text-white bg-gray-700 rounded text-sm shadow focus:outline-none focus:ring-gray-500 w-full ease-linear transition-all duration-150"
@@ -69,7 +51,7 @@ export default function Login() {
                       Senha
                     </label>
                     <input
-                      id="password-login"
+                      {...register('password')}
                       name="password"
                       type="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-500 text-white bg-gray-700 rounded text-sm shadow focus:outline-none focus:ring-gray-500 w-full ease-linear transition-all duration-150"
@@ -79,10 +61,10 @@ export default function Login() {
                   <div>
                     <label className="inline-flex items-center cursor-pointer">
                       <input
+                      {...register('rememberme')}
                         id="customCheckLogin"
                         type="checkbox"
-                        name="rememberMe"
-                        value="true"
+                        name="rememberme"
                         className="form-checkbox border-0 rounded text-emerald-700 w-5 h-5 ease-linear transition-all duration-150"
                       />
                       <span className="ml-2 text-sm font-semibold text-white">
@@ -90,11 +72,12 @@ export default function Login() {
                       </span>
                     </label>
                   </div>
-                  <div className="msg-erro mt-4">{errorMsg}</div>
+
+                  <div className="msg-erro mt-4">{error}</div>
 
                   <div className="text-center mt-6">
                     <button
-                      className="bg-emerald-800 text-white active:bg-emerald-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                      className="bg-emerald-500 text-white active:bg-emerald-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
                     >
                       Entrar

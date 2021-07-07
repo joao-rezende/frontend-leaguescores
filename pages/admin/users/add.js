@@ -1,7 +1,7 @@
-import { Form } from 'components/Users/Form';
-import Admin from 'layouts/Admin';
+import { FormUser } from "../../../components/Forms/FormUser";
+import Admin from "../../../layouts/Admin";
 
-export default Form;
+export default FormUser;
 
-Form.layout = Admin;
-Form.titlePage = "Incluir Usuário";
+FormUser.layout = Admin;
+FormUser.titlePage = "Incluir Usuário";

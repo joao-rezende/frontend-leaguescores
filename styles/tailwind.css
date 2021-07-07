@@ -2144,6 +2144,10 @@ select {
   height: 1.25rem;
 }
 
+.h-6 {
+  height: 1.5rem;
+}
+
 .h-8 {
   height: 2rem;
 }
@@ -2251,6 +2255,16 @@ select {
 
 .text-6xl {
   font-size: 3.75rem;
+  line-height: 1;
+}
+
+.text-10xl {
+  font-size: 4.75rem;
+  line-height: 1;
+}
+
+.text-13xl {
+  font-size: 5.5rem;
   line-height: 1;
 }
 
@@ -4311,7 +4325,4 @@ select {
   .xl\:w-8\/12 {
     width: 66.666667%;
   }
-}
-
-@media (min-width: 1536px) {
 }

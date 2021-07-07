@@ -1,23 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { parseCookies } from "nookies";
 
-// components
+import Admin from "../../../layouts/Admin.js";
+import CardTable from "../../../components/Cards/CardTable";
+import LineUser from "../../../components/Lines/LineUser";
+import { Link } from "../../../components/Links/Link";
 
-// layout for page
-import Admin from "layouts/Admin.js";
-import CardTable from "components/Cards/CardTable";
-import { withIronSession } from "next-iron-session";
-import LineUser from "components/Lines/LineUser";
-import { Link } from "components/Links/Link";
+const Users = () => {
+  const [users, setUsers] = useState([]);
 
-async function listUsers(page) {
-  const offset = (page - 1) * 25;
-  const res_json = await fetch(`${process.env.APIHOST}/users?offset=${offset}`);
-  const res = await res_json.json();
+  async function listUsers(page = 1) {
+    const offset = (page - 1) * 25;
+    fetch(`${process.env.APIHOST}/users?offset=${offset}`).then(async res => {
+      const { users, total } = await res.json();
+      setUsers(users);
+    });
+  }
 
-  return res.users;
-}
+  useEffect(() => {
+    listUsers();
+  }, []);
 
-const Users = ({ users }) => {
   return (
     <>
       <div className="flex flex-wrap">
@@ -51,22 +54,20 @@ const Users = ({ users }) => {
   );
 }
 
-export const getServerSideProps = withIronSession(
-  async ({ req, res }) => {
-    const user = req.session.get("user");
+export const getServerSideProps = async (ctx) => {
+  const { ['leaguescores.token']: userID } = parseCookies(ctx);
 
-    if (!user || user.length == 0) {
-      res.writeHead(302, { Location: '/' });
-      res.end();
-      return { props: {} };
+  if (!userID) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
     }
+  }
 
-    const users = await listUsers(1);
-
-    return { props: { users } };
-  },
-  process.env.CONFIGCOOKIE
-);
+  return { props: {} };
+}
 
 export default Users;
 

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 // components
 
-import PagesDropdown from "components/Dropdowns/PagesDropdown.js";
+import PagesDropdown from "../Dropdowns/PagesDropdown.js";
 
 export default function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -14,7 +14,7 @@ export default function Navbar(props) {
             <Link href="/">
               <a
                 className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                href="#"
+                href="#pablo"
               >
                 Notus NextJS
               </a>

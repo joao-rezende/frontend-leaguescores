@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 
 // components
 
-import TableDropdown from "components/Dropdowns/TableDropdown.js";
-
 export default function CardTable({ color, titleTable, columns, lines, Line }) {
   return (
     <>
@@ -24,7 +22,7 @@ export default function CardTable({ color, titleTable, columns, lines, Line }) {
                   (color === "light" ? "text-blueGray-700" : "text-white")
                 }
               >
-                Card Tables
+                {titleTable ?? ""}
               </h3>
             </div>
           </div>
@@ -61,7 +59,7 @@ export default function CardTable({ color, titleTable, columns, lines, Line }) {
 }
 
 CardTable.defaultProps = {
-  color: "light",
+  color: "dark",
   columns: [],
   lines: [],
 };

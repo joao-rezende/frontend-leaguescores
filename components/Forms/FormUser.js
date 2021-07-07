@@ -1,12 +1,11 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-import { Link } from 'components/Links/Link';
-// import { userService, alertService } from 'services';
+import { Link } from '../Links/Link';
 
-export { Form };
+export { FormUser };
 
-function Form(props) {
+function FormUser(props) {
     const user = props?.user;
     const isAddMode = !user;
     const router = useRouter();

@@ -238,3 +238,12 @@
 .margin-top-link {
   margin-top: 0.55rem;
 }
+
+#image-default-profile {
+  width: 150px;
+  height: 150px;
+}
+
+#image-default-profile i {
+  font-size: 70px;
+}

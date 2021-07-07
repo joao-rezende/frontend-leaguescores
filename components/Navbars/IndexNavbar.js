@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 // components
 
-import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
+import IndexDropdown from "../components/Dropdowns/IndexDropdown.js";
 
 export default function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -14,7 +14,7 @@ export default function Navbar(props) {
             <Link href="/">
               <a
                 className="text-blueGray-700 text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                href="#"
+                href="#pablo"
               >
                 Notus NextJS
               </a>

@@ -1,7 +1,7 @@
-import { Link } from "components/Links/Link";
 import React from "react";
 
 // components
+import { Link } from "../Links/Link";
 
 export default function LineUser({ data, color }) {
 
@@ -15,7 +15,7 @@ export default function LineUser({ data, color }) {
   }
 
   return (
-    <tr key={data.idUser}>
+    <tr key={data.userID}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
         <i className={"fas fa-circle " + ((data.status) ? "text-emerald-500" : "text-red-500") + " mr-2"}></i>{" " + ((data.status) ? "Ativo" : "Inativo")}
       </td>
@@ -33,7 +33,7 @@ export default function LineUser({ data, color }) {
         {formatDate(data.creationDate)}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-        <Link href={`/admin/users/edit/${data.idUser}`} className={"background-transparent font-bold uppercase px-1 py-1 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"}>
+        <Link href={`/admin/users/edit/${data.userID}`} className={"background-transparent font-bold uppercase px-1 py-1 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"}>
           <i className="text-emerald-400 fas fa-edit"></i> Editar
         </Link>
         <Link href="#" className={"background-transparent font-bold uppercase px-1 py-1 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"}>

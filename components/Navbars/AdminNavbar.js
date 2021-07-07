@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 
-import UserDropdown from "components/Dropdowns/UserDropdown.js";
-import { AdminContext } from '../../layouts/Admin';
+import UserDropdown from "../Dropdowns/UserDropdown.js";
+import { AdminContext } from "../../contexts/AdminContext";
 
 export default function Navbar({ titlePage }) {
-  const { collapseMenu, setCollapseMenu } = useContext(AdminContext)
+  const { collapseMenu, setCollapseMenu } = useContext(AdminContext);
+
   return (
     <>
       {/* Navbar */}
@@ -12,7 +13,7 @@ export default function Navbar({ titlePage }) {
         <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
           <button
             type="button"
-            className="btn-collapse-menu mr-3 bg-gray-700 text-emerald-500 hidden md:block"
+            className="btn-collapse-menu mr-3 bg-gray-700 text-emerald-200 hidden md:block"
             onClick={() => collapseMenu == "" ? setCollapseMenu("collapse-menu") : setCollapseMenu("")}
           >
             <i className="fas fa-bars"></i>

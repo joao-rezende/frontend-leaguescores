@@ -1,8 +1,7 @@
 import React from "react";
 
 // components
-
-import FooterSmall from "components/Footers/FooterSmall.js";
+import FooterSmall from "../components/Footers/FooterSmall.js";
 
 export default function Auth({ children }) {
   return (
@@ -13,7 +12,7 @@ export default function Auth({ children }) {
           <div
             className="bg-login absolute top-0 w-full h-full bg-black bg-no-repeat bg-full opacity-10"
             style={{
-              backgroundImage: "url('/img/register_bg_2.png')",
+              backgroundImage: "url('/img/fundo-login.png')",
             }}
           ></div>
           {children}

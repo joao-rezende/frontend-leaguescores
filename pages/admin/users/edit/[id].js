@@ -3,8 +3,19 @@ import Admin from "../../../../layouts/Admin";
 
 export async function getStaticPaths() {
   // Call an external API endpoint to get users
-  const res = await fetch(`${process.env.APIHOST}/users`)
-  const { users } = await res.json();
+  // const res = await fetch(`${process.env.APIHOST}/users`)
+  const { users } = {
+    users: [
+      {
+        userID: 1,
+        name: "João",
+        email: "jvsrpassos@gmail.com",
+        creationDate: "2021-07-09 12:22:42",
+        status: true
+      }
+    ],
+    total: 1
+  };
 
   // Get the paths we want to pre-render based on users
   const paths = users.map((user) => ({
@@ -20,8 +31,16 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   // params contains the user `id`.
   // If the route is like /users/1, then params.id is 1
-  const res = await fetch(`${process.env.APIHOST}/users/${params.id}`)
-  const { user } = await res.json()
+  // const res = await fetch(`${process.env.APIHOST}/users/${params.id}`)
+  const { user } = {
+    user: {
+      userID: 1,
+      name: "João",
+      email: "jvsrpassos@gmail.com",
+      creationDate: "2021-07-09 12:22:42",
+      status: true
+    }
+  };
 
   // Pass user data to the page via props
   return { props: { user } }

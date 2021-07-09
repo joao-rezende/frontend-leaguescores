@@ -15,31 +15,31 @@ export function AuthProvider({ children }) {
     const { 'leaguescores.token': userID } = parseCookies();
 
     if (userID) {
-      fetch(`http://local.thiago/users/${userID}`).then(async res => {
-        const { user } = await res.json();
-        setUser(user);
+      // fetch(`http://local.thiago/users/${userID}`).then(async res => {
+      //   const { user } = await res.json();
+      //   setUser(user);
 
-        setCookie(undefined, 'leaguescores.token', userID, {
+        setCookie(undefined, 'leaguescores.token', 1, {
           path: "/",
           maxAge: maxAgeCookie, 
         });
-      });
+      // });
     }
   }, []);
 
   async function signIn({ email, password, rememberme }) {
     setError(null);
 
-    const res = await fetch(
-      `http://local.thiago/login`,
-      {
-        body: JSON.stringify({ email, password }),
-        headers: { 'Content-Type': 'application/json' },
-        method: 'POST'
-      }
-    );
+    // const res = await fetch(
+    //   `http://local.thiago/login`,
+    //   {
+    //     body: JSON.stringify({ email, password }),
+    //     headers: { 'Content-Type': 'application/json' },
+    //     method: 'POST'
+    //   }
+    // );
 
-    const { result, user, message } = await res.json();
+    const { result, user, message } = { result: true, user: { userID: 1, name: "João", email: "jvsrpassos@gmail.com" }, message: ""};
 
     if (!result) {
       setError(message);

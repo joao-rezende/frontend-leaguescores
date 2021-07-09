@@ -4,7 +4,7 @@ import React from "react";
 // import { Spinner } from "reactstrap";
 
 // core components
-import Admin from "layouts/Admin.js";
+import Admin from "../../layouts/Admin";
 
 export default function PageChange(props) {
   return (

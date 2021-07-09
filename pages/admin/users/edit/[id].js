@@ -7,7 +7,7 @@ export async function getStaticPaths() {
   const { users } = {
     users: [
       {
-        userID: 1,
+        userID: "1",
         name: "João",
         email: "jvsrpassos@gmail.com",
         creationDate: "2021-07-09 12:22:42",

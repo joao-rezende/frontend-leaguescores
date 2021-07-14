@@ -11,21 +11,10 @@ const Users = () => {
 
   async function listUsers(page = 1) {
     const offset = (page - 1) * 25;
-    // fetch(`${process.env.APIHOST}/users?offset=${offset}`).then(async res => {
-    const { users, total } = {
-      users: [
-        {
-          userID: 1,
-          name: "João",
-          email: "jvsrpassos@gmail.com",
-          creationDate: "2021-07-09 12:22:42",
-          status: true
-        }
-      ],
-      total: 1
-    };
-    setUsers(users);
-    // });
+    fetch(`${process.env.APIHOST}/users?offset=${offset}`).then(async res => {
+      const { users, total } = await res.json();
+      setUsers(users);
+    });
   }
 
   useEffect(() => {

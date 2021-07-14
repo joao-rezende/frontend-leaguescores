@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
     const { 'leaguescores.token': userID } = parseCookies();
 
     if (userID) {
-      fetch(`http://local.thiago/users/${userID}`).then(async res => {
+      fetch(`${process.env.APIHOST}/users/${userID}`).then(async res => {
         const { user } = await res.json();
         setUser(user);
 
@@ -31,7 +31,7 @@ export function AuthProvider({ children }) {
     setError(null);
 
     const res = await fetch(
-      `http://local.thiago/login`,
+      `${process.env.APIHOST}/login`,
       {
         body: JSON.stringify({ email, password }),
         headers: { 'Content-Type': 'application/json' },

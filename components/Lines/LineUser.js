@@ -3,7 +3,7 @@ import React from "react";
 // components
 import { Link } from "../Links/Link";
 
-export default function LineUser({ data, color }) {
+export default function LineUser({ data, color, onInactivate }) {
 
   function formatDate(date) {
     date = new Date(date);
@@ -14,10 +14,10 @@ export default function LineUser({ data, color }) {
     return dateFormat + " às " + hourFormat;
   }
 
-  return (
+return (
     <tr key={data.userID}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-        <i className={"fas fa-circle " + ((data.status) ? "text-emerald-500" : "text-red-500") + " mr-2"}></i>{" " + ((data.status) ? "Ativo" : "Inativo")}
+        <i className={"fas fa-circle " + ((data.status == "t") ? "text-emerald-500" : "text-red-500") + " mr-2"}></i>{" " + ((data.status == "t") ? "Ativo" : "Inativo")}
       </td>
       <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
         <span
@@ -36,9 +36,9 @@ export default function LineUser({ data, color }) {
         <Link href={`/admin/users/edit/${data.userID}`} className={"background-transparent font-bold uppercase px-1 py-1 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"}>
           <i className="text-emerald-400 fas fa-edit"></i> Editar
         </Link>
-        <Link href="#" className={"background-transparent font-bold uppercase px-1 py-1 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"}>
+        <a href="#" onClick={onInactivate} data-id={data.userID} className={"background-transparent font-bold uppercase px-1 py-1 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"}>
           <i className="text-red-500 fas fa-ban"></i> Inativar
-        </Link>
+        </a>
         <Link href="#" className={"background-transparent font-bold uppercase px-1 py-1 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"}>
           <i className="text-lightBlue-500 fas fa-sign-in-alt"></i> Acessar
         </Link>

@@ -5,8 +5,16 @@ import Admin from "../../../layouts/Admin.js";
 import CardTable from "../../../components/Cards/CardTable";
 import LineUser from "../../../components/Lines/LineUser";
 import { Link } from "../../../components/Links/Link";
+import { ConfirmModal } from "../../../components/Modals/ConfirmModal.js";
+import { LoadModal } from "../../../components/Modals/LoadModal.js";
+import Api from "../../../services/Api.js";
 
 const Users = () => {
+  const api = Api();
+  const [inactivateId, setInactivateId] = useState(null);
+  const [showConfirmInactivate, setShowConfirmInactivate] = useState(false);
+  const [showLoadInactivate, setShowLoadInactivate] = useState(false);
+  const [completeLoadInactivate, setCompleteLoadInactivate] = useState(false);
   const [users, setUsers] = useState([]);
 
   async function listUsers(page = 1) {
@@ -15,6 +23,27 @@ const Users = () => {
       const { users, total } = await res.json();
       setUsers(users);
     });
+  }
+
+  function inactivateUser(e) {
+    const { id } = e.target.dataset;
+    setInactivateId(id);
+    setShowConfirmInactivate(true);
+  }
+
+  async function confirmInactivate() {
+    setShowConfirmInactivate(false);
+    setShowLoadInactivate(true);
+
+    const { result, message } = await api.post(`/api/users/edit/${inactivateId}`, { status: false });
+
+    if (!result) {
+      console.error(message);
+      return false;
+    }
+
+    setCompleteLoadInactivate(true);
+    listUsers();
   }
 
   useEffect(() => {
@@ -45,11 +74,16 @@ const Users = () => {
           <CardTable
             color="dark"
             columns={["Status", "Nome", "Data de cadastro", ""]}
+            onInactivate={inactivateUser}
             Line={LineUser}
             lines={users}
           />
         </div>
       </div>
+      <LoadModal show={showLoadInactivate} setShow={setShowLoadInactivate} completeLoad={completeLoadInactivate}>{!completeLoadInactivate ? "Inativando usuário" : "Usuário inativado"}</LoadModal>
+      <ConfirmModal show={showConfirmInactivate} onConfirm={confirmInactivate} onCancel={() => setShowConfirmInactivate(false)}>
+        Deseja realmente inativar o usuário?
+      </ConfirmModal>
     </>
   );
 }

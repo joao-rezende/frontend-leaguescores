@@ -15,6 +15,10 @@ const Users = () => {
   const [showConfirmInactivate, setShowConfirmInactivate] = useState(false);
   const [showLoadInactivate, setShowLoadInactivate] = useState(false);
   const [completeLoadInactivate, setCompleteLoadInactivate] = useState(false);
+  const [activateId, setActivateId] = useState(null);
+  const [showConfirmActivate, setShowConfirmActivate] = useState(false);
+  const [showLoadActivate, setShowLoadActivate] = useState(false);
+  const [completeLoadActivate, setCompleteLoadActivate] = useState(false);
   const [users, setUsers] = useState([]);
 
   async function listUsers(page = 1) {
@@ -23,6 +27,27 @@ const Users = () => {
       const { users, total } = await res.json();
       setUsers(users);
     });
+  }
+
+  function activateUser(e) {
+    const { id } = e.target.dataset;
+    setActivateId(id);
+    setShowConfirmActivate(true);
+  }
+
+  async function confirmActivate() {
+    setShowConfirmActivate(false);
+    setShowLoadActivate(true);
+
+    const { result, message } = await api.post(`/api/users/edit/${activateId}`, { status: true });
+
+    if (!result) {
+      console.error(message);
+      return false;
+    }
+
+    setCompleteLoadActivate(true);
+    listUsers();
   }
 
   function inactivateUser(e) {
@@ -75,6 +100,7 @@ const Users = () => {
             color="dark"
             columns={["Status", "Nome", "Data de cadastro", ""]}
             onInactivate={inactivateUser}
+            onActivate={activateUser}
             Line={LineUser}
             lines={users}
           />
@@ -83,6 +109,10 @@ const Users = () => {
       <LoadModal show={showLoadInactivate} setShow={setShowLoadInactivate} completeLoad={completeLoadInactivate}>{!completeLoadInactivate ? "Inativando usuário" : "Usuário inativado"}</LoadModal>
       <ConfirmModal show={showConfirmInactivate} onConfirm={confirmInactivate} onCancel={() => setShowConfirmInactivate(false)}>
         Deseja realmente inativar o usuário?
+      </ConfirmModal>
+      <LoadModal show={showLoadActivate} setShow={setShowLoadActivate} completeLoad={completeLoadActivate}>{!completeLoadActivate ? "Ativando usuário" : "Usuário ativado"}</LoadModal>
+      <ConfirmModal show={showConfirmActivate} onConfirm={confirmActivate} onCancel={() => setShowConfirmActivate(false)}>
+        Deseja realmente ativar o usuário?
       </ConfirmModal>
     </>
   );

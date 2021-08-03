@@ -120,8 +120,10 @@ const Users = () => {
 
 export const getServerSideProps = async (ctx) => {
   const { ['leaguescores.token']: userID } = parseCookies(ctx);
+  const res = await fetch(`${process.env.APIHOST}/users/${userID}`);
+  const { user } = await res.json();
 
-  if (!userID) {
+  if (!userID || !user || user.type != 1) {
     return {
       redirect: {
         destination: '/',

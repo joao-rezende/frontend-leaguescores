@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import UserDropdown from "../Dropdowns/UserDropdown";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Sidebar() {
-
+  const { user } = useContext(AuthContext);
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   const router = useRouter();
 
@@ -100,39 +101,47 @@ export default function Sidebar() {
                 </Link>
               </li>
 
-              <li className="items-center">
-                <Link href="/admin/users">
-                  <a
-                    href="#"
-                    className={
-                      "text-xs py-2 block px-3 font-medium " +
-                      (router.pathname.indexOf("/admin/users") !== -1
-                        ? "bg-emerald-800 bg-opacity-30 text-emerald-500 hover:bg-emerald-600 rounded-md"
-                        : "text-gray-600 hover:text-gray-400")
-                    }
-                  >
-                    <i className={"fas fa-users mr-4 text-lg"}></i>{" "}
-                    <span className={"text-sidebar"}>Usuários</span>
-                  </a>
-                </Link>
-              </li>
+              {
+                user &&
+                user.type == 1 &&
+                <li className="items-center">
+                  <Link href="/admin/users">
+                    <a
+                      href="#"
+                      className={
+                        "text-xs py-2 block px-3 font-medium " +
+                        (router.pathname.indexOf("/admin/users") !== -1
+                          ? "bg-emerald-800 bg-opacity-30 text-emerald-500 hover:bg-emerald-600 rounded-md"
+                          : "text-gray-600 hover:text-gray-400")
+                      }
+                    >
+                      <i className={"fas fa-users mr-4 text-lg"}></i>{" "}
+                      <span className={"text-sidebar"}>Usuários</span>
+                    </a>
+                  </Link>
+                </li>
+              }
 
-              <li className="items-center">
-                <Link href="/admin/analysis">
-                  <a
-                    href="#"
-                    className={
-                      "text-xs py-2 block px-3 font-medium " +
-                      (router.pathname.indexOf("/admin/analysis") !== -1
-                        ? "bg-emerald-800 bg-opacity-30 text-emerald-500 hover:bg-emerald-600 rounded-md"
-                        : "text-gray-600 hover:text-gray-400")
-                    }
-                  >
-                    <i className={"fas fa-chart-line mr-4 text-lg"}></i>{" "}
-                    <span className={"text-sidebar"}>Análises</span>
-                  </a>
-                </Link>
-              </li>
+              {
+                user &&
+                user.type == 1 &&
+                <li className="items-center">
+                  <Link href="/admin/analysis">
+                    <a
+                      href="#"
+                      className={
+                        "text-xs py-2 block px-3 font-medium " +
+                        (router.pathname.indexOf("/admin/analysis") !== -1
+                          ? "bg-emerald-800 bg-opacity-30 text-emerald-500 hover:bg-emerald-600 rounded-md"
+                          : "text-gray-600 hover:text-gray-400")
+                      }
+                    >
+                      <i className={"fas fa-chart-line mr-4 text-lg"}></i>{" "}
+                      <span className={"text-sidebar"}>Análises</span>
+                    </a>
+                  </Link>
+                </li>
+              }
 
               <li className="items-center">
                 <Link href="/admin/tables">

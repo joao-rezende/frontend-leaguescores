@@ -337,3 +337,8 @@
 .load-modal .complete.show, .load-modal .load.show {
   display: block;
 }
+
+#bank-periodo-input {
+  margin-right: 10px;
+  width: calc(100% - 153.15px);  
+}

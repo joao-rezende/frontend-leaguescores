@@ -3,32 +3,51 @@ import Chart from "chart.js";
 
 export default function CardLineChart() {
   React.useEffect(() => {
+    const labels = [];
+    const metaReal = [];
+    const metaMax = [];
+    const metaMin = [];
+    const lucro = [];
+    for (let i = 0; i < 30; i++) {
+      labels[i] = i + 1;
+      metaReal[i] = (Math.random() * 100 + 1).toFixed(2);
+      metaMax[i] = (Math.random() * 100 + 1).toFixed(2);
+      metaMin[i] = (Math.random() * 100 + 1).toFixed(2);
+      lucro[i] = (Math.random() * 100 + 1).toFixed(2);
+    }
+
     var config = {
       type: "line",
       data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-        ],
+        labels: labels,
         datasets: [
           {
-            label: new Date().getFullYear(),
-            backgroundColor: "#4c51bf",
-            borderColor: "#4c51bf",
-            data: [65, 78, 66, 44, 56, 67, 75],
+            label: "Meta Real",
+            backgroundColor: "#fff",
+            borderColor: "#fff",
+            data: metaReal,
             fill: false,
           },
           {
-            label: new Date().getFullYear() - 1,
+            label: "Meta Máxima",
+            backgroundColor: "#0ea5e9",
+            borderColor: "#0ea5e9",
             fill: false,
-            backgroundColor: "#fff",
-            borderColor: "#fff",
-            data: [40, 68, 86, 74, 56, 60, 87],
+            data: metaMax,
+          },
+          {
+            label: "Meta Mínima",
+            fill: false,
+            backgroundColor: "#FBBF24",
+            borderColor: "#FBBF24",
+            data: metaMin,
+          },
+          {
+            label: "Lucro",
+            fill: false,
+            backgroundColor: "#34d399",
+            borderColor: "#34d399",
+            data: lucro,
           },
         ],
       },
@@ -37,7 +56,7 @@ export default function CardLineChart() {
         responsive: true,
         title: {
           display: false,
-          text: "Sales Charts",
+          text: "Gráfico da Banca",
           fontColor: "white",
         },
         legend: {
@@ -45,7 +64,7 @@ export default function CardLineChart() {
             fontColor: "white",
           },
           align: "end",
-          position: "bottom",
+          position: "top",
         },
         tooltips: {
           mode: "index",
@@ -63,8 +82,8 @@ export default function CardLineChart() {
               },
               display: true,
               scaleLabel: {
-                display: false,
-                labelString: "Month",
+                display: true,
+                labelString: "Dias",
                 fontColor: "white",
               },
               gridLines: {
@@ -85,8 +104,8 @@ export default function CardLineChart() {
               },
               display: true,
               scaleLabel: {
-                display: false,
-                labelString: "Value",
+                display: true,
+                labelString: "Valores",
                 fontColor: "white",
               },
               gridLines: {
@@ -108,14 +127,12 @@ export default function CardLineChart() {
   }, []);
   return (
     <>
-      <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700">
+      <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-gray-800">
         <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full max-w-full flex-grow flex-1">
-              <h6 className="uppercase text-blueGray-100 mb-1 text-xs font-semibold">
-                Overview
-              </h6>
-              <h2 className="text-white text-xl font-semibold">Sales value</h2>
+              <h2 className="text-white text-xl font-semibold">Metas e Lucros</h2>
+              <hr class="mt-4 border-b-1 border-gray-700"></hr>
             </div>
           </div>
         </div>

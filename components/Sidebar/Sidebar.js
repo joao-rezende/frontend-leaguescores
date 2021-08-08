@@ -157,12 +157,29 @@ export default function Sidebar() {
                           : "text-gray-600 hover:text-gray-400")
                       }
                     >
-                      <i className={"fas fa-chart-bar mr-4 text-lg"}></i>{" "}
+                      <i className={"fas fa-sliders-h mr-4 text-lg"}></i>{" "}
                       <span className={"text-sidebar"}>Parâmetros da Banca</span>
                     </a>
                   </Link>
                 </li>
               }
+
+              <li className="items-center">
+                <Link href="/admin/bank-management">
+                  <a
+                    href="#"
+                    className={
+                      "text-xs py-2 block px-3 font-medium " +
+                      (router.pathname.indexOf("/admin/bank-management") !== -1
+                        ? "bg-emerald-800 bg-opacity-30 text-emerald-500 hover:bg-emerald-600 rounded-md"
+                        : "text-gray-600 hover:text-gray-400")
+                    }
+                  >
+                    <i className={"fas fa-chart-area mr-4 text-lg"}></i>{" "}
+                    <span className={"text-sidebar"}>Gestão da Banca</span>
+                  </a>
+                </Link>
+              </li>
 
               <li className="items-center">
                 <Link href="/admin/tables">

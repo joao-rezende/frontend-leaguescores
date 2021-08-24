@@ -2222,6 +2222,10 @@ select {
   font-size: 55rem;
 }
 
+.text-\.65 {
+  font-size: 0.65rem;
+}
+
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;

@@ -340,5 +340,20 @@
 
 #bank-periodo-input {
   margin-right: 10px;
-  width: calc(100% - 153.15px);  
+  width: calc(100% - 153.15px);
+  transition: width 0.01ms;
+}
+
+#contribution {
+  margin-right: 10px;
+  width: calc(100% - 186.38px);   
+  transition: width 0.01ms;
+}
+
+#bank-periodo-input.submitting {
+  width: calc(100% - 171.15px);
+}
+
+#contribution.submitting {
+  width: calc(100% - 205.15px);
 }

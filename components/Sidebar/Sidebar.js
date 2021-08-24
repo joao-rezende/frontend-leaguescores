@@ -180,40 +180,6 @@ export default function Sidebar() {
                   </a>
                 </Link>
               </li>
-
-              <li className="items-center">
-                <Link href="/admin/tables">
-                  <a
-                    href="#"
-                    className={
-                      "text-xs py-2 block px-3 font-medium " +
-                      (router.pathname.indexOf("/admin/tables") !== -1
-                        ? "bg-emerald-800 bg-opacity-30 text-emerald-500 hover:bg-emerald-600 rounded-md"
-                        : "text-gray-600 hover:text-gray-400")
-                    }
-                  >
-                    <i className={"fas fa-user-friends mr-4 text-lg"}></i>{" "}
-                    <span className={"text-sidebar"}>Usuários</span>
-                  </a>
-                </Link>
-              </li>
-
-              <li className="items-center">
-                <Link href="/admin/maps">
-                  <a
-                    href="#"
-                    className={
-                      "text-xs py-2 block px-3 font-medium " +
-                      (router.pathname.indexOf("/admin/maps") !== -1
-                        ? "bg-emerald-800 bg-opacity-30 text-emerald-500 hover:bg-emerald-600 rounded-md"
-                        : "text-gray-600 hover:text-gray-400")
-                    }
-                  >
-                    <i className={"fas fa-user-friends mr-4 text-lg"}></i>{" "}
-                    <span className={"text-sidebar"}>Usuários</span>
-                  </a>
-                </Link>
-              </li>
             </ul>
           </div>
         </div>

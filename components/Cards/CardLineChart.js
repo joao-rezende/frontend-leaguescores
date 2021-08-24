@@ -1,21 +1,9 @@
 import React from "react";
 import Chart from "chart.js";
+import Api from "../../services/Api";
 
-export default function CardLineChart() {
+export default function CardLineChart({ labels, metaReal, metaMax, metaMin }) {
   React.useEffect(() => {
-    const labels = [];
-    const metaReal = [];
-    const metaMax = [];
-    const metaMin = [];
-    const lucro = [];
-    for (let i = 0; i < 30; i++) {
-      labels[i] = i + 1;
-      metaReal[i] = (Math.random() * 100 + 1).toFixed(2);
-      metaMax[i] = (Math.random() * 100 + 1).toFixed(2);
-      metaMin[i] = (Math.random() * 100 + 1).toFixed(2);
-      lucro[i] = (Math.random() * 100 + 1).toFixed(2);
-    }
-
     var config = {
       type: "line",
       data: {
@@ -41,14 +29,7 @@ export default function CardLineChart() {
             backgroundColor: "#FBBF24",
             borderColor: "#FBBF24",
             data: metaMin,
-          },
-          {
-            label: "Lucro",
-            fill: false,
-            backgroundColor: "#34d399",
-            borderColor: "#34d399",
-            data: lucro,
-          },
+          }
         ],
       },
       options: {
@@ -131,8 +112,8 @@ export default function CardLineChart() {
         <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full max-w-full flex-grow flex-1">
-              <h2 className="text-white text-xl font-semibold">Metas e Lucros</h2>
-              <hr class="mt-4 border-b-1 border-gray-700"></hr>
+              <h2 className="text-white text-xl font-semibold">Metas</h2>
+              <hr className="mt-4 border-b-1 border-gray-700"></hr>
             </div>
           </div>
         </div>

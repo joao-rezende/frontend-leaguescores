@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { parseCookies } from "nookies";
 
 import Admin from "../../../layouts/Admin.js";
@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { Link } from "../../../components/Links/Link.js";
 import CardTable from "../../../components/Cards/CardTable.js";
+import LineOperations from "../../../components/Lines/LineOperations.js";
 
 const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) => {
   const router = useRouter();
@@ -20,6 +21,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
   const [isSubmitting, setIsSubmiting] = useState(false);
   const [generalError, setGeneralError] = useState('');
   const api = Api();
+  const [operations, setOperations] = useState([]);
 
   async function handleInsert(data) {
     setIsSubmiting(true);
@@ -67,6 +69,16 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
     router.push("/admin/bank-management");
   }
 
+  async function listOperations(page = 1) {
+    const offset = (page - 1) * 25;
+    const { operations, total } = await api.get(`${process.env.APIHOST}/operations?offset=${offset}`);
+    setOperations(operations);
+  }
+
+  useEffect(() => {
+    listOperations();
+  }, []);
+
   function formatMoney(value, currency) {
     value = parseFloat(value).toFixed(2);
 
@@ -80,7 +92,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
   const now = new Date();
   const start = new Date(bank.start);
   const diff = Math.abs(now.getTime() - start.getTime());
-  const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+  let days = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
   if (days == 0) {
     days = 1;
@@ -191,7 +203,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
               <div className="flex flex-wrap mt-6">
                 <div className="w-4/12 md:w-5/12 pr-4">
                   <div className="margin-top-link mb-3">
-                    <Link href="/admin/params-bank/add" className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 padding-link rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Adicionar</Link>
+                    <Link href="/admin/operations/add" className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 padding-link rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Adicionar</Link>
                   </div>
                 </div>
               </div>
@@ -200,8 +212,8 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
                   <CardTable
                     color="dark"
                     columns={["Data", "Jogo", "Valor apostado", "Resultado", ""]}
-                    Line={[]}
-                    lines={[]}
+                    Line={LineOperations}
+                    lines={operations}
                   />
                 </div>
               </div>
@@ -316,37 +328,41 @@ export const getServerSideProps = async (ctx) => {
   const api = Api();
   const { bank } = await api.get(`${process.env.APIHOST}/banks?userID=${userID}`);
 
-  const { paramsBank } = await api.get(`${process.env.APIHOST}/params-bank?period=${bank.period}`);
-  let maxEndDay = paramsBank[0].endDay;
-
-  paramsBank.map(paramBank => {
-    if (maxEndDay < paramBank.endDay) maxEndDay = paramBank.endDay;
-  });
 
   const labels = [];
   const metaReal = [];
   const metaMax = [];
   const metaMin = [];
-  let valueMetaReal = parseFloat(bank.currentyValue);
-  let valueMetaMax = parseFloat(bank.currentyValue);
-  let valueMetaMin = parseFloat(bank.currentyValue);
 
-  const limit = bank.period < maxEndDay ? bank.period : maxEndDay;
-  for (let i = 0; i < limit; i++) {
-    let paramBankSelect = null;
-    const day = i + 1;
+  if (bank.bankID) {
+    const { paramsBank } = await api.get(`${process.env.APIHOST}/params-bank?period=${bank.period}`);
+    let maxEndDay = paramsBank[0].endDay;
 
     paramsBank.map(paramBank => {
-      if (paramBank.startDay <= day && paramBank.endDay >= day) paramBankSelect = paramBank;
+      if (maxEndDay < paramBank.endDay) maxEndDay = paramBank.endDay;
     });
 
-    labels[i] = day;
-    metaReal[i] = valueMetaReal += valueMetaReal * paramBankSelect.real;
-    metaReal[i] = metaReal[i].toFixed(2);
-    metaMax[i] = valueMetaMax += valueMetaMax * paramBankSelect.maximum;
-    metaMax[i] = metaMax[i].toFixed(2);
-    metaMin[i] = valueMetaMin += valueMetaMin * paramBankSelect.minimium;
-    metaMin[i] = metaMin[i].toFixed(2);
+    let valueMetaReal = parseFloat(bank.currentyValue);
+    let valueMetaMax = parseFloat(bank.currentyValue);
+    let valueMetaMin = parseFloat(bank.currentyValue);
+
+    const limit = bank.period < maxEndDay ? bank.period : maxEndDay;
+    for (let i = 0; i < limit; i++) {
+      let paramBankSelect = null;
+      const day = i + 1;
+
+      paramsBank.map(paramBank => {
+        if (paramBank.startDay <= day && paramBank.endDay >= day) paramBankSelect = paramBank;
+      });
+
+      labels[i] = day;
+      metaReal[i] = valueMetaReal += valueMetaReal * paramBankSelect.real;
+      metaReal[i] = metaReal[i].toFixed(2);
+      metaMax[i] = valueMetaMax += valueMetaMax * paramBankSelect.maximum;
+      metaMax[i] = metaMax[i].toFixed(2);
+      metaMin[i] = valueMetaMin += valueMetaMin * paramBankSelect.minimium;
+      metaMin[i] = metaMin[i].toFixed(2);
+    }
   }
 
   return { props: { userID, bank, labels, metaReal, metaMax, metaMin } };

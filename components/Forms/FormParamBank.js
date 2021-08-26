@@ -157,7 +157,7 @@ function FormParamBank(props) {
                       type="number"
                       step="0.001"
                       className={`px-3 py-3 text-white bg-gray-700 rounded text-sm shadow focus:outline-none focus:ring-gray-500 w-full ease-linear transition-all duration-150 ${errors.maximum ? "border-red-300 border-0 border-b placeholder-red-300" : "border-0 placeholder-blueGray-500"}`}
-                      placeholder="Mínimmo"
+                      placeholder="Máximo"
                       {...register('maximum')}
                     />
                     {errors.maximum && <p className="text-xs text-red-300 mt-1">{errors.maximum.message}</p>}

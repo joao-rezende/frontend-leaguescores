@@ -126,7 +126,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
             <div className="w-full lg:w-6/12 xl:w-3/12 pl-4">
               <CardStats
                 statSubtitle="LUCRO OBTIDO ATÉ O MOMENTO"
-                statTitle={bank.initialsCurrency + " " + formatMoney((parseFloat(bank.initialValue) - parseFloat(bank.currentyValue)).toFixed(2).toString(), bank.initialsCurrency)}
+                statTitle={bank.initialsCurrency + " " + formatMoney((parseFloat(bank.currentyValue) - parseFloat(bank.initialValue)).toFixed(2).toString(), bank.initialsCurrency)}
                 statIconName="far fa-money-bill-alt"
                 statIconColor="bg-emerald-500"
               />
@@ -140,11 +140,11 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
               <hr className="my-4 border-b-1 border-gray-700"></hr>
 
               <div className="flex flex-wrap">
-                <div className="bg-emerald-500 text-white mx-auto rounded-lg shadow-lg px-4 py-2">Banca: <b>R$ {bank.currentyValue}</b></div>
+                <div className="bg-emerald-500 text-white mx-auto rounded-lg shadow-lg px-4 py-2">Banca: <b>{bank.initialsCurrency + " " + formatMoney(bank.currentyValue, bank.initialsCurrency)}</b></div>
               </div>
               <form onSubmit={handleSubmitContrib(handleInsertContribution)}>
-                <div className="flex flex-wrap mt-6">
-                  <div className="w-full lg:w-6/12 pr-4">
+                <div className="flex flex-wrap mt-6 text-center">
+                  <div className="w-full mx-auto">
                     <div className="relative w-full mb-3">
                       <label
                         className={`block uppercase text-xs font-bold mb-2 ${errorsContrib.contribution ? "text-red-300" : "text-white"}`}
@@ -156,13 +156,14 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
                         id="contribution"
                         type="number"
                         step="0.01"
-                        className={`px-3 py-3 text-white bg-gray-700 rounded text-sm shadow focus:outline-none focus:ring-gray-500 w-full ease-linear transition-all duration-150 ${isSubmitting && "submitting"} ${errorsContrib.contribution ? "border-red-300 border-0 border-b placeholder-red-300" : "border-0 placeholder-blueGray-500"}`}
+                        className={`px-3 py-3 text-white bg-gray-700 rounded text-sm shadow focus:outline-none focus:ring-gray-500 w-full lg:w-4/12 ease-linear transition-all duration-150 ${errorsContrib.contribution ? "border-red-300 border-0 border-b placeholder-red-300" : "border-0 placeholder-blueGray-500"}`}
                         placeholder="Valor de aporte"
                         {...registerContrib('contribution', { required: "Este campo é obrigatório" })}
                       />
+                      <br />
                       <button
                         type="submit"
-                        className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+                        className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 mt-3"
                       >
                         {isSubmitting && <span className="fas fa-circle-notch fa-spin mr-1"></span>}
                         Realizar Aporte

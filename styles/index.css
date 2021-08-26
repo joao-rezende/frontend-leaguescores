@@ -345,8 +345,6 @@
 }
 
 #contribution {
-  margin-right: 10px;
-  width: calc(100% - 186.38px);   
   transition: width 0.01ms;
 }
 

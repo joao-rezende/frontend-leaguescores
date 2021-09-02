@@ -78,13 +78,13 @@ const Users = () => {
   return (
     <>
       <div className="flex flex-wrap">
-        <div className="w-4/12 md:w-5/12 pr-4">
+        <div className="w-full sm:w-5/12 pr-4">
           <div className="margin-top-link">
             <Link href="/admin/users/add" className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 padding-link rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Adicionar</Link>
           </div>
         </div>
-        <div className="w-8/12 md:w-7/12 pl-4 text-right">
-          <span className="z-10 leading-snug font-normal absolute text-center text-gray-300 absolute bg-transparent rounded-full text-base items-center justify-center w-8 pl-3 py-3">
+        <div className="w-full sm:w-7/12 pt-4 sm:pt-0 sm:pl-4 text-right">
+          <span className="z-2 leading-snug font-normal absolute text-center text-gray-300 absolute bg-transparent rounded-full text-base items-center justify-center w-8 pl-3 py-3">
             <i className="fas fa-search"></i>
           </span>
           <input

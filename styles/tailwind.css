@@ -2948,6 +2948,10 @@ select {
   padding-left: 0.75rem;
 }
 
+.pt-4 {
+  padding-top: 1rem;
+}
+
 .pr-4 {
   padding-right: 1rem;
 }
@@ -3771,7 +3775,7 @@ select {
 }
 
 .z-2 {
-  z-index: 2;
+  z-index: 2 !important;
 }
 
 .z-3 {
@@ -3994,12 +3998,28 @@ select {
     padding-top: 0px;
   }
 
+  .sm\:pr-4 {
+    padding-right: 1rem;
+  }
+
+  .sm\:pl-4 {
+    padding-left: 1rem;
+  }
+
   .sm\:pt-20 {
     padding-top: 5rem;
   }
 
   .sm\:w-6\/12 {
     width: 50%;
+  }
+
+  .sm\:w-5\/12 {
+    width: 41.666667%;
+  }
+
+  .sm\:w-7\/12 {
+    width: 58.333333%;
   }
 }
 
@@ -4100,6 +4120,14 @@ select {
     overflow-y: auto;
   }
 
+  .md\:pr-4 {
+    padding-right: 1rem;
+  }
+
+  .md\:pl-4 {
+    padding-left: 1rem;
+  }
+
   .md\:px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -4118,8 +4146,16 @@ select {
     padding-bottom: 0.5rem;
   }
 
+  .md\:pb-12 {
+    padding-bottom: 3rem;
+  }
+
   .md\:pr-12 {
     padding-right: 3rem;
+  }
+
+  .md\:pt-20 {
+    padding-top: 5rem;
   }
 
   .md\:pt-32 {
@@ -4277,17 +4313,29 @@ select {
     padding-bottom: 0.5rem;
   }
 
-  .lg\:px-10 {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-  }
-
   .lg\:pt-0 {
     padding-top: 0px;
   }
 
   .lg\:pt-4 {
     padding-top: 1rem;
+  }
+
+  .lg\:px-4, .lg\:pr-4 {
+    padding-right: 1rem;
+  }
+  
+  .lg\:px-4, .lg\:pl-4 {
+    padding-left: 1rem;
+  }
+
+  .lg\:.pb-9 {
+    padding-bottom: 2.25rem;
+  }
+
+  .lg\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 
   .lg\:pt-12 {
@@ -4390,5 +4438,13 @@ select {
 
   .xl\:w-8\/12 {
     width: 66.666667%;
+  }
+
+  .xl\:px-4, .xl\:pr-4 {
+    padding-right: 1rem;
+  }
+  
+  .xl\:px-4, .xl\:pl-4 {
+    padding-left: 1rem;
   }
 }

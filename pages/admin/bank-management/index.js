@@ -113,7 +113,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
             <CardLineChart labels={labels} metaReal={metaReal} metaMax={metaMax} metaMin={metaMin} />
           </div>
           <div className="flex flex-wrap">
-            <div className="w-full lg:w-6/12 xl:w-3/12 pr-4">
+            <div className="w-full lg:w-6/12 xl:w-3/12 px-0 lg:pr-4">
               <CardStats
                 statSubtitle="META REAL DA PRÓXIMA JOGADA"
                 statTitle={bank.initialsCurrency + " " + formatMoney(metaReal[days + 1], bank.initialsCurrency)}
@@ -121,7 +121,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
                 statIconColor="bg-orange-500"
               />
             </div>
-            <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+            <div className="w-full lg:w-6/12 xl:w-3/12 px-0 lg:pl-4 xl:px-4">
               <CardStats
                 statSubtitle="META MÁXIMA DA PRÓXIMA JOGADA"
                 statTitle={bank.initialsCurrency + " " + formatMoney(metaMax[days + 1], bank.initialsCurrency)}
@@ -129,7 +129,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
                 statIconColor="bg-lightBlue-500"
               />
             </div>
-            <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+            <div className="w-full lg:w-6/12 xl:w-3/12 px-0 lg:pr-4 xl:px-4">
               <CardStats
                 statSubtitle="META MÍNIMA DA PRÓXIMA JOGADA"
                 statTitle={bank.initialsCurrency + " " + formatMoney(metaMin[days + 1], bank.initialsCurrency)}
@@ -137,7 +137,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
                 statIconColor="bg-yellow-500"
               />
             </div>
-            <div className="w-full lg:w-6/12 xl:w-3/12 pl-4">
+            <div className="w-full lg:w-6/12 xl:w-3/12 px-0 lg:pl-4">
               <CardStats
                 statSubtitle="LUCRO OBTIDO ATÉ O MOMENTO"
                 statTitle={bank.initialsCurrency + " " + formatMoney(lucro, bank.initialsCurrency)}
@@ -210,7 +210,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
                 </div>
               </div>
               <div className="flex flex-wrap mt-3">
-                <div className="w-full mb-12">
+                <div className="w-full">
                   <CardTable
                     color="dark"
                     columns={["Data", "Jogo", "Valor apostado", "Resultado", ""]}

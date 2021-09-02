@@ -9,7 +9,7 @@ export default function Navbar({ titlePage }) {
   return (
     <>
       {/* Navbar */}
-      <nav className="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center py-4">
+      <nav className="absolute top-0 left-0 w-full z-2 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center py-4">
         <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
           <button
             type="button"

@@ -74,7 +74,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
     const offset = (page - 1) * 25;
     const { operations, total, resultTotal } = await api.get(`${process.env.APIHOST}/operations?offset=${offset}`);
     setOperations(operations);
-    setLucro(resultTotal);
+    setLucro(resultTotal ?? 0);
   }
 
   useEffect(() => {

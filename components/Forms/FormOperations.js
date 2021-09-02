@@ -62,7 +62,7 @@ function FormOperations(props) {
     }
 
     alert("Atualizado com sucesso");
-    router.push("/admin/operations");
+    router.push("/admin/bank-management");
   }
 
   return (

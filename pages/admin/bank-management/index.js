@@ -22,6 +22,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
   const [generalError, setGeneralError] = useState('');
   const api = Api();
   const [operations, setOperations] = useState([]);
+  const [lucro, setLucro] = useState(0);
 
   async function handleInsert(data) {
     setIsSubmiting(true);
@@ -71,8 +72,9 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
 
   async function listOperations(page = 1) {
     const offset = (page - 1) * 25;
-    const { operations, total } = await api.get(`${process.env.APIHOST}/operations?offset=${offset}`);
+    const { operations, total, resultTotal } = await api.get(`${process.env.APIHOST}/operations?offset=${offset}`);
     setOperations(operations);
+    setLucro(resultTotal);
   }
 
   useEffect(() => {
@@ -138,7 +140,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
             <div className="w-full lg:w-6/12 xl:w-3/12 pl-4">
               <CardStats
                 statSubtitle="LUCRO OBTIDO ATÉ O MOMENTO"
-                statTitle={bank.initialsCurrency + " " + formatMoney((parseFloat(bank.currentyValue) - parseFloat(bank.initialValue)).toFixed(2).toString(), bank.initialsCurrency)}
+                statTitle={bank.initialsCurrency + " " + formatMoney(lucro, bank.initialsCurrency)}
                 statIconName="far fa-money-bill-alt"
                 statIconColor="bg-emerald-500"
               />
@@ -152,7 +154,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
               <hr className="my-4 border-b-1 border-gray-700"></hr>
 
               <div className="flex flex-wrap">
-                <div className="bg-emerald-500 text-white mx-auto rounded-lg shadow-lg px-4 py-2">Banca: <b>{bank.initialsCurrency + " " + formatMoney(bank.currentyValue, bank.initialsCurrency)}</b></div>
+                <div className="bg-emerald-500 text-white mx-auto rounded-lg shadow-lg px-4 py-2">Banca: <b>{bank.initialsCurrency + " " + formatMoney(parseFloat(bank.currentyValue), bank.initialsCurrency)}</b></div>
               </div>
               <form onSubmit={handleSubmitContrib(handleInsertContribution)}>
                 <div className="flex flex-wrap mt-6 text-center">

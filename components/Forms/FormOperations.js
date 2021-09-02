@@ -9,6 +9,7 @@ export { FormOperations };
 
 function FormOperations(props) {
   let operation = props?.operation;
+  const bank = props?.bank;
   const isAddMode = !operation;
 
   if (isAddMode) {
@@ -25,7 +26,7 @@ function FormOperations(props) {
   const api = Api();
   const { userID } = props.user;
 
-  
+
   async function handleInsert(data) {
     data.userID = userID;
 
@@ -138,7 +139,16 @@ function FormOperations(props) {
                       step="0.01"
                       className={`px-3 py-3 text-white bg-gray-700 rounded text-sm shadow focus:outline-none focus:ring-gray-500 w-full ease-linear transition-all duration-150 ${errors.valueOperation ? "border-red-300 border-0 border-b placeholder-red-300" : "border-0 placeholder-blueGray-500"}`}
                       placeholder="Valor da aposta"
-                      {...register('valueOperation', { required: "Este campo é obrigatório" })}
+                      {...register(
+                        'valueOperation',
+                        {
+                          required: "Este campo é obrigatório",
+                          max: {
+                            value: bank.currentyValue,
+                            message: "Sua banca não tem o valor suficiente (Banca: " + bank.currentyValue + ")"
+                          }
+                        }
+                      )}
                     />
                     {errors.valueOperation && <p className="text-xs text-red-300 mt-1">{errors.valueOperation.message}</p>}
                   </div>

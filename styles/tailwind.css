@@ -1504,6 +1504,11 @@ select {
   border-color: rgba(212, 212, 216, var(--tw-border-opacity));
 }
 
+.border-gray-400 {
+  --tw-border-opacity: 1;
+  border-color: rgba(129, 129, 129, var(--tw-border-opacity));
+}
+
 .border-gray-700 {
   --tw-border-opacity: 1;
   border-color: rgba(63, 63, 70, var(--tw-border-opacity));
@@ -2188,6 +2193,10 @@ select {
 
 .h-24 {
   height: 6rem;
+}
+
+.h-28 {
+  height: 7rem;
 }
 
 .h-auto {
@@ -3147,6 +3156,10 @@ select {
 
 .-left-20-px {
   left: -20px;
+}
+
+.top-10-px {
+  top: 10px;
 }
 
 .top-25-px {

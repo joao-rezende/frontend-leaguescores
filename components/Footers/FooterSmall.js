@@ -20,7 +20,7 @@ export default function FooterSmall(props) {
             </div>
             <div className="w-full md:w-4/12 px-4 text-center md:text-right">
               <small className="text-gray-500">Desenvolvido por: </small>
-              <img alt="Logo Empresa" className="w-8 inline-block" src="/img/logo.png" />
+              <img alt="Logo Empresa" className="w-8 inline-block" src="/img/logo_tech.png" />
             </div>
           </div>
         </div>

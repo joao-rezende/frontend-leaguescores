@@ -27,10 +27,10 @@ export default function Sidebar() {
           <Link href="/">
             <a
               href="/"
-              className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm font-bold p-4 px-0"
+              className="md:block text-left text-white mr-0 inline-block whitespace-nowrap text-sm font-bold p-0 px-0 border-gray-400"
             >
-              <span className="logo-desktop text-left">LeagueScores</span>
-              <span className="logo-collapse text-center">LS</span>
+              <span className="logo-desktop text-center mb-6"><img alt="Logo Empresa" className="h-12 inline-block" src="/img/logo.png" /></span>
+              <span className="logo-collapse text-center mb-6"><img alt="Logo Empresa" className="h-12 mx-auto" src="/img/logo.png" /></span>
             </a>
           </Link>
           {/* User */}

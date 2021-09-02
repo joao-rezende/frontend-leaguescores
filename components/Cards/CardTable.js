@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 // components
 
-export default function CardTable({ color, titleTable, columns, lines, Line, onInactivate, onActivate }) {
+export default function CardTable({ color, titleTable, columns, lines, Line, onInactivate, onActivate, adicionalData }) {
   return (
     <>
       <div
@@ -48,7 +48,7 @@ export default function CardTable({ color, titleTable, columns, lines, Line, onI
             </thead>
             <tbody>
               {lines.map((line, key) => (
-                <Line key={key} data={line} color={color} onInactivate={onInactivate} onActivate={onActivate} />
+                <Line key={key} data={line} color={color} onInactivate={onInactivate} onActivate={onActivate} adicionalData={adicionalData} />
               ))}
             </tbody>
           </table>

@@ -216,6 +216,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
                     columns={["Data", "Jogo", "Valor apostado", "Resultado", ""]}
                     Line={LineOperations}
                     lines={operations}
+                    adicionalData={[bank.initialsCurrency]}
                   />
                 </div>
               </div>

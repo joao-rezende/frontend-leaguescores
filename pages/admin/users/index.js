@@ -23,10 +23,8 @@ const Users = () => {
 
   async function listUsers(page = 1) {
     const offset = (page - 1) * 25;
-    fetch(`${process.env.APIHOST}/users?offset=${offset}`).then(async res => {
-      const { users, total } = await res.json();
-      setUsers(users);
-    });
+    const { users, total } = await api.post("/api/users", { offset });
+    setUsers(users);
   }
 
   function activateUser(e) {

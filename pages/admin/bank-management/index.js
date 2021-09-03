@@ -72,7 +72,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
 
   async function listOperations(page = 1) {
     const offset = (page - 1) * 25;
-    const { operations, total, resultTotal } = await api.get(`${process.env.APIHOST}/operations?offset=${offset}`);
+    const { operations, total, resultTotal } = await api.get(`/api/operations`, { offset });
     setOperations(operations);
     setLucro(resultTotal ?? 0);
   }
@@ -329,8 +329,9 @@ export const getServerSideProps = async (ctx) => {
   }
 
   const api = Api();
-  const { bank } = await api.get(`${process.env.APIHOST}/banks?userID=${userID}`);
+  const host = (ctx.req.headers.referer.indexOf("https") == -1 ? "http" : "https") + "://" + ctx.req.headers.host;
 
+  const { bank } = await api.post(host + '/api/banks', { userID });
 
   const labels = [];
   const metaReal = [];
@@ -338,7 +339,7 @@ export const getServerSideProps = async (ctx) => {
   const metaMin = [];
 
   if (bank.bankID) {
-    const { paramsBank } = await api.get(`${process.env.APIHOST}/params-bank?period=${bank.period}`);
+    const { paramsBank } = await api.post(host + '/api/params-bank', { period: bank.period });
     let maxEndDay = paramsBank[0].endDay;
 
     paramsBank.map(paramBank => {

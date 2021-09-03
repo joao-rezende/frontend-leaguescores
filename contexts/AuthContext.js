@@ -13,18 +13,16 @@ export function AuthProvider({ children }) {
   const isAuthenticated = !!user;
   const maxAgeCookie = 60 * 20; //20 minutes
 
-  useEffect(() => {
+  useEffect(async () => {
     const { 'leaguescores.token': userID } = parseCookies();
 
     if (userID) {
-      fetch(`${process.env.APIHOST}/users/${userID}`).then(async res => {
-        const { user } = await res.json();
-        setUser(user);
+      const { user } = await api.get(`/api/users/${userID}`);
 
-        setCookie(undefined, 'leaguescores.token', userID, {
-          path: "/",
-          maxAge: maxAgeCookie, 
-        });
+      setUser(user);
+      setCookie(undefined, 'leaguescores.token', userID, {
+        path: "/",
+        maxAge: maxAgeCookie,
       });
     }
   }, []);
@@ -49,7 +47,7 @@ export function AuthProvider({ children }) {
     Router.push('/admin/home');
   }
 
-  function signOut () {
+  function signOut() {
     destroyCookie(undefined, 'leaguescores.token', {
       path: "/",
     });

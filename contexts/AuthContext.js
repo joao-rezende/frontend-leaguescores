@@ -15,6 +15,7 @@ export function AuthProvider({ children }) {
     const { 'leaguescores.token': userID } = parseCookies();
 
     if (userID) {
+      console.log(process.env.APIHOST);
       fetch(`${process.env.APIHOST}/users/${userID}`).then(async res => {
         const { user } = await res.json();
         setUser(user);

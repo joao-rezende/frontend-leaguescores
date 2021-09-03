@@ -7,6 +7,7 @@ import Auth from "../layouts/Auth";
 import { AuthContext } from "../contexts/AuthContext";
 
 export default function Login() {
+  console.log(process.env.APIHOST);
   const { register, handleSubmit } = useForm();
   const { error, signIn } = useContext(AuthContext);
 

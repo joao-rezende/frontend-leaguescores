@@ -1,12 +1,14 @@
 import { createContext, useState, useEffect } from "react";
 import { setCookie, parseCookies, destroyCookie } from 'nookies';
 import Router from 'next/router';
+import Api from "../services/Api";
 
 export const AuthContext = createContext({});
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+  const api = Api();
 
   const isAuthenticated = !!user;
   const maxAgeCookie = 60 * 20; //20 minutes
@@ -15,7 +17,6 @@ export function AuthProvider({ children }) {
     const { 'leaguescores.token': userID } = parseCookies();
 
     if (userID) {
-      console.log(process.env.APIHOST);
       fetch(`${process.env.APIHOST}/users/${userID}`).then(async res => {
         const { user } = await res.json();
         setUser(user);
@@ -31,16 +32,7 @@ export function AuthProvider({ children }) {
   async function signIn({ email, password, rememberme }) {
     setError(null);
 
-    const res = await fetch(
-      `${process.env.APIHOST}/login`,
-      {
-        body: JSON.stringify({ email, password }),
-        headers: { 'Content-Type': 'application/json' },
-        method: 'POST'
-      }
-    );
-
-    const { result, user, message } = await res.json();
+    const { result, user, message } = await api.post('/api/login', { email, password });
 
     if (!result) {
       setError(message);
@@ -49,7 +41,7 @@ export function AuthProvider({ children }) {
 
     setCookie(undefined, 'leaguescores.token', user.userID, {
       path: "/",
-      maxAge: rememberme ? 157680000 :maxAgeCookie, //1 hour
+      maxAge: rememberme ? 157680000 : maxAgeCookie,
     });
 
     setUser(user);

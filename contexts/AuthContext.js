@@ -31,7 +31,7 @@ export function AuthProvider({ children }) {
     setError(null);
 
     const res = await fetch(
-      `${process.env.APIHOST}/login`,
+      `process.env.APIHOST/login`,
       {
         body: JSON.stringify({ email, password }),
         headers: { 'Content-Type': 'application/json' },

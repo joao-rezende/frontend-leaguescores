@@ -340,11 +340,14 @@ export const getServerSideProps = async (ctx) => {
 
   if (bank.bankID) {
     const { paramsBank } = await api.post(host + '/api/params-bank', { period: bank.period });
-    let maxEndDay = paramsBank[0].endDay;
+    let maxEndDay = 0;
+    if (paramsBank) {
+      maxEndDay = paramsBank[0].endDay;
 
-    paramsBank.map(paramBank => {
-      if (maxEndDay < paramBank.endDay) maxEndDay = paramBank.endDay;
-    });
+      paramsBank.map(paramBank => {
+        if (maxEndDay < paramBank.endDay) maxEndDay = paramBank.endDay;
+      });
+    }
 
     let valueMetaReal = parseFloat(bank.currentyValue);
     let valueMetaMax = parseFloat(bank.currentyValue);

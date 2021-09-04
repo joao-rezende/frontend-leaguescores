@@ -19,10 +19,8 @@ const ParamsBank = () => {
 
   async function listParamsBank(page = 1) {
     const offset = (page - 1) * 25;
-    fetch(`${process.env.APIHOST}/params-bank?offset=${offset}`).then(async res => {
-      const { paramsBank, total } = await res.json();
-      setParamsBank(paramsBank);
-    });
+    const { paramsBank, total } = await api.post("/api/params-bank", { offset });
+    setParamsBank(paramsBank);
   }
 
   function deleteParam(e) {
@@ -88,9 +86,11 @@ const ParamsBank = () => {
 }
 
 export const getServerSideProps = async (ctx) => {
+  const api = Api();
+  const host = (ctx.req.headers.referer.indexOf("https") == -1 ? "http" : "https") + "://" + ctx.req.headers.host;
+
   const { ['leaguescores.token']: userID } = parseCookies(ctx);
-  const res = await fetch(`${process.env.APIHOST}/users/${userID}`);
-  const { user } = await res.json();
+  const { user } = await api.get(host + `/api/users/${userID}`);
 
   if (!userID || !user || user.type != 1) {
     return {

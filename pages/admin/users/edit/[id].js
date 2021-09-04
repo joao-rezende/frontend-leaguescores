@@ -1,12 +1,14 @@
 import { parseCookies } from "nookies";
 import { FormUser } from "../../../../components/Forms/FormUser";
 import Admin from "../../../../layouts/Admin";
+import Api from "../../../../services/Api";
 
 export async function getServerSideProps(ctx) {
+  const api = Api();
+  const host = (ctx.req.headers.referer.indexOf("https") == -1 ? "http" : "https") + "://" + ctx.req.headers.host;
+
   const { ['leaguescores.token']: userID } = parseCookies(ctx);
-  const resJsonLogged = await fetch(`${process.env.APIHOST}/users/${userID}`);
-  const resLogged = await resJsonLogged.json();
-  const userLogged = resLogged.user;
+  const { user: userLogged } = await api.get(`${host}/api/users/${userID}`);
 
   if (!userID || !userLogged || userLogged.type != 1) {
     return {
@@ -18,8 +20,7 @@ export async function getServerSideProps(ctx) {
   }
 
   const { params } = ctx;
-  const res = await fetch(`${process.env.APIHOST}/users/${params.id}`);
-  const { user } = await res.json();
+  const { user } = await api.get(`${host}/api/users/${params.id}`);
 
   return { props: { user } }
 }

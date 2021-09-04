@@ -117,9 +117,11 @@ const Users = () => {
 }
 
 export const getServerSideProps = async (ctx) => {
+  const api = Api();
+  const host = (ctx.req.headers.referer.indexOf("https") == -1 ? "http" : "https") + "://" + ctx.req.headers.host;
+
   const { ['leaguescores.token']: userID } = parseCookies(ctx);
-  const res = await fetch(`${process.env.APIHOST}/users/${userID}`);
-  const { user } = await res.json();
+  const { user } = await api.get(`${host}/api/users/${userID}`);
 
   if (!userID || !user || user.type != 1) {
     return {

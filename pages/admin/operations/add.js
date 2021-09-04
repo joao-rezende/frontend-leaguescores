@@ -5,9 +5,10 @@ import Api from "../../../services/Api.js";
 
 export const getServerSideProps = async (ctx) => {
   const api = Api();
+  const host = (ctx.req.headers.referer.indexOf("https") == -1 ? "http" : "https") + "://" + ctx.req.headers.host;
 
   const { ['leaguescores.token']: userID } = parseCookies(ctx);
-  const { user } = await api.get(`${process.env.APIHOST}/users/${userID}`);
+  const { user } = await api.get(host + `/api/users/${userID}`);
 
   if (!userID || !user || user.type != 1) {
     return {
@@ -18,7 +19,7 @@ export const getServerSideProps = async (ctx) => {
     }
   }
   
-  const { bank } = await api.get(`${process.env.APIHOST}/banks?userID=${userID}`);
+  const { bank } = await api.post(host + '/api/banks', { userID });
 
   return { props: { user, bank } };
 }

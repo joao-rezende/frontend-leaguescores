@@ -175,6 +175,24 @@ export default function Sidebar() {
                   </a>
                 </Link>
               </li>
+
+              <li className="items-center">
+                <Link href="/admin/bank-result">
+                  <a
+                    href="#"
+                    onClick={() => setCollapseShow("hidden")}
+                    className={
+                      "text-xs py-2 block px-3 font-medium " +
+                      (router.pathname.indexOf("/admin/bank-result") !== -1
+                        ? "bg-emerald-800 bg-opacity-30 text-emerald-500 hover:bg-emerald-600 rounded-md"
+                        : "text-gray-600 hover:text-gray-400")
+                    }
+                  >
+                    <i className={"fas fa-poll mr-4 text-lg"}></i>{" "}
+                    <span className={"text-sidebar"}>Resultados da Banca</span>
+                  </a>
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

@@ -42,7 +42,7 @@ export default function CardLineChart({ labels, metaReal, metaMax, metaMin }) {
         },
         legend: {
           labels: {
-            fontColor: "white",
+            fontColor: "rgba(255,255,255,.4)",
           },
           align: "end",
           position: "top",
@@ -94,7 +94,7 @@ export default function CardLineChart({ labels, metaReal, metaMax, metaMin }) {
                 borderDashOffset: [3],
                 drawBorder: false,
                 color: "rgba(255, 255, 255, 0.15)",
-                zeroLineColor: "rgba(33, 37, 41, 0)",
+                zeroLineColor: "rgba(255, 255, 255, 0)",
                 zeroLineBorderDash: [2],
                 zeroLineBorderDashOffset: [2],
               },

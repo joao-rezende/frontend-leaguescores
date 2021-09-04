@@ -1,7 +1,7 @@
 import React from "react";
 import Chart from "chart.js";
 
-export default function CardBarChart({ profits, losses, initialsCurrency }) {
+export default function CardLineChart({ evolution, initialsCurrency }) {
   function formatMoney(value, currency) {
     value = parseFloat(value).toFixed(2);
 
@@ -14,41 +14,25 @@ export default function CardBarChart({ profits, losses, initialsCurrency }) {
 
   React.useEffect(() => {
     const labels = [];
-    const dataProfits = [];
-    const dataLosses = [];
-
-    profits.map(data => {
+    const dataChart = [];
+    evolution.map(data => {
       const year = data.date.substr(0, 4);
       const month = data.date.substr(5, 2);
       labels.push(month + "/" + year);
-      dataProfits.push(data.value);
+      dataChart.push(data.total);
     });
-
-    losses.map(data => {
-      dataLosses.push(parseFloat(data.value) * -1);
-    });
-
-    let config = {
-      type: "bar",
+    var config = {
+      type: "line",
       data: {
         labels: labels,
         datasets: [
           {
-            label: "Lucro",
-            backgroundColor: "rgb(52, 211, 153)",
-            borderColor: "rgb(52, 211, 153)",
-            data: dataProfits,
-            fill: false,
-            barThickness: 8,
-          },
-          {
-            label: "Prejuízo",
-            fill: false,
-            backgroundColor: "rgb(248, 113, 113)",
-            borderColor: "rgb(248, 113, 113)",
-            data: dataLosses,
-            barThickness: 8,
-          },
+            label: "Valor da Banca",
+            backgroundColor: "#0284C7",
+            borderColor: "#38BDF8",
+            data: dataChart,
+            fill: true,
+          }
         ],
       },
       options: {
@@ -56,7 +40,15 @@ export default function CardBarChart({ profits, losses, initialsCurrency }) {
         responsive: true,
         title: {
           display: false,
-          text: "Orders Chart",
+          text: "Gráfico da Banca",
+          fontColor: "rgba(255,255,255,.8)",
+        },
+        legend: {
+          labels: {
+            fontColor: "rgba(255,255,255,.7)",
+          },
+          align: "end",
+          position: "top",
         },
         tooltips: {
           mode: "index",
@@ -78,27 +70,26 @@ export default function CardBarChart({ profits, losses, initialsCurrency }) {
         hover: {
           mode: "nearest",
           intersect: true,
-        },
-        legend: {
-          labels: {
-            fontColor: "rgba(255,255,255,.7)",
-          },
-          align: "end",
-          position: "bottom",
+
         },
         scales: {
           xAxes: [
             {
-              display: false,
+              ticks: {
+                fontColor: "rgba(255,255,255,.7)",
+              },
+              display: true,
               scaleLabel: {
                 display: true,
-                labelString: "Meses",
+                labelString: "Dias",
+                fontColor: "white",
               },
               gridLines: {
+                display: false,
                 borderDash: [2],
                 borderDashOffset: [2],
-                color: "rgba(255, 255, 255, 0.15)",
-                zeroLineColor: "rgba(255, 255, 255, 0.3)",
+                color: "rgba(33, 37, 41, 0.3)",
+                zeroLineColor: "rgba(0, 0, 0, 0)",
                 zeroLineBorderDash: [2],
                 zeroLineBorderDashOffset: [2],
               },
@@ -106,16 +97,21 @@ export default function CardBarChart({ profits, losses, initialsCurrency }) {
           ],
           yAxes: [
             {
+              ticks: {
+                fontColor: "rgba(255,255,255,.7)",
+              },
               display: true,
               scaleLabel: {
+                display: true,
                 labelString: "Valores",
+                fontColor: "white",
               },
               gridLines: {
-                borderDash: [2],
+                borderDash: [3],
+                borderDashOffset: [3],
                 drawBorder: false,
-                borderDashOffset: [2],
                 color: "rgba(255, 255, 255, 0.15)",
-                zeroLineColor: "rgba(255, 255, 255, 0.3)",
+                zeroLineColor: "rgba(255, 255, 255, 0)",
                 zeroLineBorderDash: [2],
                 zeroLineBorderDashOffset: [2],
               },
@@ -124,8 +120,8 @@ export default function CardBarChart({ profits, losses, initialsCurrency }) {
         },
       },
     };
-    let ctx = document.getElementById("bar-chart").getContext("2d");
-    window.myBar = new Chart(ctx, config);
+    var ctx = document.getElementById("line-chart-evolution").getContext("2d");
+    window.myLine = new Chart(ctx, config);
   }, []);
   return (
     <>
@@ -133,7 +129,7 @@ export default function CardBarChart({ profits, losses, initialsCurrency }) {
         <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full max-w-full flex-grow flex-1">
-              <h2 className="text-white text-xl font-semibold">Lucros X Prejuízos</h2>
+              <h2 className="text-white text-xl font-semibold">Evolução da Banca</h2>
               <hr className="mt-4 border-b-1 border-gray-700"></hr>
             </div>
           </div>
@@ -141,7 +137,7 @@ export default function CardBarChart({ profits, losses, initialsCurrency }) {
         <div className="p-4 flex-auto">
           {/* Chart */}
           <div className="relative h-350-px">
-            <canvas id="bar-chart"></canvas>
+            <canvas id="line-chart-evolution"></canvas>
           </div>
         </div>
       </div>

@@ -116,7 +116,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
             <div className="w-full lg:w-6/12 xl:w-3/12 px-0 lg:pr-4">
               <CardStats
                 statSubtitle="META REAL DA PRÓXIMA JOGADA"
-                statTitle={bank.initialsCurrency + " " + formatMoney(metaReal[days + 1], bank.initialsCurrency)}
+                statTitle={bank.initialsCurrency + " " + (metaReal[days + 1] ? formatMoney(metaReal[days + 1], bank.initialsCurrency) : " - ")}
                 statIconName="fas fa-flag-checkered"
                 statIconColor="bg-orange-500"
               />
@@ -124,7 +124,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
             <div className="w-full lg:w-6/12 xl:w-3/12 px-0 lg:pl-4 xl:px-4">
               <CardStats
                 statSubtitle="META MÁXIMA DA PRÓXIMA JOGADA"
-                statTitle={bank.initialsCurrency + " " + formatMoney(metaMax[days + 1], bank.initialsCurrency)}
+                statTitle={bank.initialsCurrency + " " + (metaMax[days + 1] ? formatMoney(metaMax[days + 1], bank.initialsCurrency) : " - ")}
                 statIconName="fas fa-flag"
                 statIconColor="bg-lightBlue-500"
               />
@@ -132,7 +132,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
             <div className="w-full lg:w-6/12 xl:w-3/12 px-0 lg:pr-4 xl:px-4">
               <CardStats
                 statSubtitle="META MÍNIMA DA PRÓXIMA JOGADA"
-                statTitle={bank.initialsCurrency + " " + formatMoney(metaMin[days + 1], bank.initialsCurrency)}
+                statTitle={bank.initialsCurrency + " " + (metaMax[days + 1] ? formatMoney(metaMin[days + 1], bank.initialsCurrency) : " - ")}
                 statIconName="far fa-flag"
                 statIconColor="bg-yellow-500"
               />
@@ -341,7 +341,7 @@ export const getServerSideProps = async (ctx) => {
   if (bank.bankID) {
     const { paramsBank } = await api.post(host + '/api/params-bank', { period: bank.period });
     let maxEndDay = 0;
-    if (paramsBank) {
+    if (paramsBank && paramsBank.length > 0) {
       maxEndDay = paramsBank[0].endDay;
 
       paramsBank.map(paramBank => {

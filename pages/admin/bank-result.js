@@ -25,7 +25,7 @@ export default function Home({ resultBank }) {
         <div className="w-full lg:w-6/12 xl:w-3/12 px-0 lg:pr-4">
           <CardStats
             statSubtitle="RESULTADO NO PERÍODO"
-            statTitle={resultBank.initialsCurrency + " " + (resultBank ? formatMoney(resultBank.periodResult, resultBank.initialsCurrency) : " - ")}
+            statTitle={resultBank.initialsCurrency + " " + (resultBank && resultBank.periodResult ? formatMoney(resultBank.periodResult, resultBank.initialsCurrency) : "0,00")}
             statIconName="fas fa-coins"
             statIconColor="bg-red-500"
           />
@@ -33,7 +33,7 @@ export default function Home({ resultBank }) {
         <div className="w-full lg:w-6/12 xl:w-3/12 px-0 xl:pr-4 lg:pl-4">
           <CardStats
             statSubtitle="LUCRO MÉDIO POR APOSTA"
-            statTitle={resultBank.initialsCurrency + " " + (resultBank ? formatMoney(resultBank.avgProfit, resultBank.initialsCurrency) : " - ")}
+            statTitle={resultBank.initialsCurrency + " " + (resultBank && resultBank.avgProfit ? formatMoney(resultBank.avgProfit, resultBank.initialsCurrency) : "0,00")}
             statIconName="far fa-money-bill-alt"
             statIconColor="bg-emerald-500"
           />
@@ -41,7 +41,7 @@ export default function Home({ resultBank }) {
         <div className="w-full lg:w-6/12 xl:w-3/12 px-0 lg:pr-4 xl:pl-4">
           <CardStats
             statSubtitle="ROI"
-            statTitle={resultBank.initialsCurrency + " " + (resultBank ? formatMoney(resultBank.roi, resultBank.initialsCurrency) : " - ")}
+            statTitle={resultBank.initialsCurrency + " " + (resultBank && resultBank.roi ? formatMoney(resultBank.roi, resultBank.initialsCurrency) : "0,00")}
             statIconName="fas fa-balance-scale"
             statIconColor="bg-orange-500"
           />
@@ -49,7 +49,7 @@ export default function Home({ resultBank }) {
         <div className="w-full lg:w-6/12 xl:w-3/12 px-0 lg:pl-4">
           <CardStats
             statSubtitle="TOTAL DA BANCA"
-            statTitle={resultBank.initialsCurrency + " " + (resultBank ? formatMoney(resultBank.totalBank, resultBank.initialsCurrency) : " - ")}
+            statTitle={resultBank.initialsCurrency + " " + (resultBank && resultBank.totalBank ? formatMoney(resultBank.totalBank, resultBank.initialsCurrency) : "0,00")}
             statIconName="fas fa-wallet"
             statIconColor="bg-lightBlue-500"
           />
@@ -67,7 +67,7 @@ export default function Home({ resultBank }) {
         <div className="w-full lg:w-6/12 xl:w-3/12 px-0 lg:pr-4">
           <CardStats
             statSubtitle="APOSTAS REALIZADAS"
-            statTitle={(resultBank ? resultBank.totalBets : " - ")}
+            statTitle={(resultBank && resultBank.totalBets ? resultBank.totalBets : "0")}
             statIconName="fas fa-hand-holding-usd"
             statIconColor="bg-lightBlue-500"
           />
@@ -75,7 +75,7 @@ export default function Home({ resultBank }) {
         <div className="w-full lg:w-6/12 xl:w-3/12 px-0 xl:pr-4 lg:pl-4">
           <CardStats
             statSubtitle="TOTAL INVESTIDO"
-            statTitle={resultBank.initialsCurrency + " " + (resultBank ? formatMoney(resultBank.totalInvested, resultBank.initialsCurrency) : " - ")}
+            statTitle={resultBank.initialsCurrency + " " + (resultBank && resultBank.totalInvested ? formatMoney(resultBank.totalInvested, resultBank.initialsCurrency) : "0,00")}
             statIconName="fas fa-donate"
             statIconColor="bg-orange-500"
           />
@@ -83,7 +83,7 @@ export default function Home({ resultBank }) {
         <div className="w-full lg:w-6/12 xl:w-3/12 px-0 lg:pr-4 xl:pl-4">
           <CardStats
             statSubtitle="RESULTADO DA BANCA"
-            statTitle={resultBank.initialsCurrency + " " + (resultBank ? formatMoney(resultBank.resultbank, resultBank.initialsCurrency) : " - ")}
+            statTitle={resultBank.initialsCurrency + " " + (resultBank && resultBank.resultbank ? formatMoney(resultBank.resultbank, resultBank.initialsCurrency) : "0,00")}
             statIconName="fas fa-coins"
             statIconColor="bg-red-500"
           />
@@ -91,7 +91,7 @@ export default function Home({ resultBank }) {
         <div className="w-full lg:w-6/12 xl:w-3/12 px-0 lg:pl-4">
           <CardStats
             statSubtitle="STAKE MÉDIA"
-            statTitle={resultBank.initialsCurrency + " " + (resultBank ? formatMoney(resultBank.avgstake, resultBank.initialsCurrency) : " - ")}
+            statTitle={resultBank.initialsCurrency + " " + (resultBank && resultBank.avgstake ? formatMoney(resultBank.avgstake, resultBank.initialsCurrency) : "0,00")}
             statIconName="fas fa-percent"
             statIconColor="bg-emerald-500"
           />

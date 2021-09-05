@@ -56,16 +56,17 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
       value: data.contribution,
       bankID: bank.bankID
     };
-
+    
     const { result, message } = await api.post("/api/contributions/add", data);
-
+    
     setIsSubmiting(false);
-
+    
     if (!result) {
       setGeneralError(message.join("<br>"));
       return false;
     }
-
+    
+    document.getElementById("contribution").value = ""
     alert("Aporte realizado com sucesso");
     router.push("/admin/bank-management");
   }

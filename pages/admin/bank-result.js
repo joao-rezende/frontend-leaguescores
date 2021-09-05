@@ -1,12 +1,12 @@
 import { parseCookies } from "nookies";
-import React, { useContext } from "react";
+import React from "react";
 import CardStats from "../../components/Cards/CardStats.js";
 import CardAreaChartBankEvolution from "../../components/Cards/CardAreaChartBankEvolution.js";
 
 import Admin from "../../layouts/Admin.js";
 import Api from "../../services/Api.js";
 import CardBarChart from "../../components/Cards/CardBarChart.js";
-import CardLineChart from "../../components/Cards/CardLineChart.js";
+import CardLineChartAccResult from "../../components/Cards/CardLineChartAccResult.js";
 
 export default function Home({ resultBank }) {
   function formatMoney(value, currency) {
@@ -30,7 +30,7 @@ export default function Home({ resultBank }) {
             statIconColor="bg-red-500"
           />
         </div>
-        <div className="w-full lg:w-6/12 xl:w-3/12 px-0 lg:pr-4 xl:pl-4">
+        <div className="w-full lg:w-6/12 xl:w-3/12 px-0 xl:pr-4 lg:pl-4">
           <CardStats
             statSubtitle="LUCRO MÉDIO POR APOSTA"
             statTitle={resultBank.initialsCurrency + " " + (resultBank ? formatMoney(resultBank.avgProfit, resultBank.initialsCurrency) : " - ")}
@@ -72,7 +72,7 @@ export default function Home({ resultBank }) {
             statIconColor="bg-lightBlue-500"
           />
         </div>
-        <div className="w-full lg:w-6/12 xl:w-3/12 px-0 lg:pr-4 xl:pl-4">
+        <div className="w-full lg:w-6/12 xl:w-3/12 px-0 xl:pr-4 lg:pl-4">
           <CardStats
             statSubtitle="TOTAL INVESTIDO"
             statTitle={resultBank.initialsCurrency + " " + (resultBank ? formatMoney(resultBank.totalInvested, resultBank.initialsCurrency) : " - ")}
@@ -99,7 +99,7 @@ export default function Home({ resultBank }) {
       </div>
       <div className="flex flex-wrap pt-4 mb-12">
         <div className="w-full">
-          <CardLineChart />
+          <CardLineChartAccResult results={resultBank.resultsAcc} initialsCurrency={resultBank.initialsCurrency} />
         </div>
       </div>
     </>
@@ -108,7 +108,7 @@ export default function Home({ resultBank }) {
 
 export const getServerSideProps = async (ctx) => {
   const api = Api();
-  const host = (ctx.req.headers.referer.indexOf("https") == -1 ? "http" : "https") + "://" + ctx.req.headers.host;
+  const host = (ctx.req.headers.referer && ctx.req.headers.referer.indexOf("https") == -1 ? "http" : "https") + "://" + ctx.req.headers.host;
 
   const { ['leaguescores.token']: userID } = parseCookies(ctx);
 

@@ -74,7 +74,7 @@ export default function Sidebar() {
             {/* Navigation */}
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none sidebar">
-              <li className="items-center">
+              <li className="items-center hidden">
                 <Link href="/admin/home">
                   <a
                     href="#"
@@ -117,7 +117,7 @@ export default function Sidebar() {
               {
                 user &&
                 user.type == 1 &&
-                <li className="items-center">
+                <li className="items-center hidden">
                   <Link href="/admin/analysis">
                     <a
                       href="#"

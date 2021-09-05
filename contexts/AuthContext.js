@@ -43,8 +43,8 @@ export function AuthProvider({ children }) {
     });
 
     setUser(user);
-
-    Router.push('/admin/home');
+    
+    Router.push('/admin/bank-management');
   }
 
   function signOut() {

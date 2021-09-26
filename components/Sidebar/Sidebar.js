@@ -117,7 +117,7 @@ export default function Sidebar() {
               {
                 user &&
                 user.type == 1 &&
-                <li className="items-center">
+                <li className="items-center hidden">
                   <Link href="/admin/analysis/add-batch">
                     <a
                       href="#"
@@ -138,7 +138,7 @@ export default function Sidebar() {
               {
                 user &&
                 user.type == 1 &&
-                <li className="items-center">
+                <li className="items-center hidden">
                   <Link href="/admin/analysis">
                     <a
                       href="#"

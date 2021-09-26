@@ -332,7 +332,9 @@ export const getServerSideProps = async (ctx) => {
   const api = Api();
   const host = (ctx.req.headers.referer.indexOf("https") == -1 ? "http" : "https") + "://" + ctx.req.headers.host;
 
-  const { bank } = await api.post(host + '/api/banks', { userID });
+  let { bank } = await api.post(host + '/api/banks', { userID });
+
+  if (bank == undefined) bank = [];
 
   const labels = [];
   const metaReal = [];

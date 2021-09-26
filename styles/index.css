@@ -365,3 +365,13 @@
 #contribution.submitting {
   width: calc(100% - 205.15px);
 }
+
+.logo-menu {
+  margin-bottom: 1.5rem;
+}
+
+@media(max-width: 767px) {
+  .logo-menu {
+    margin-bottom: 0;
+  }
+}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { parseCookies } from "nookies";
 
 // components
-import LineAnalysis from "../../../components/Lines/LineAnalysis";
+import LineAnalysis from "../../../components/Lines/LineAnalisys";
 
 // layout for page
 import Admin from "../../../layouts/Admin";

@@ -29,8 +29,8 @@ export default function Sidebar() {
               href="/"
               className="md:block text-left text-white mr-0 inline-block whitespace-nowrap text-sm font-bold p-0 px-0 border-gray-400"
             >
-              <span className="logo-desktop text-center mb-6"><img alt="Logo Empresa" className="h-12 inline-block" src="/img/logo.png" /></span>
-              <span className="logo-collapse text-center mb-6"><img alt="Logo Empresa" className="h-12 mx-auto" src="/img/logo.png" /></span>
+              <span className="logo-desktop text-center logo-menu"><img alt="Logo Empresa" className="h-12 inline-block" src="/img/logo.png" /></span>
+              <span className="logo-collapse text-center logo-menu"><img alt="Logo Empresa" className="h-12 mx-auto" src="/img/logo.png" /></span>
             </a>
           </Link>
           {/* User */}

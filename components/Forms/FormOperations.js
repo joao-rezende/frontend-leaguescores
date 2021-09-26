@@ -90,7 +90,7 @@ function FormOperations(props) {
                   </div>
                 </div>
                 <div className="w-full hidden lg:block lg:w-2/12 px-4 text-center">
-                  <label className="text-white text-9xl pt-12">X</label>
+                  <label className="text-white text-9xl pt-12"><span className="fas fa-times"></span></label>
                 </div>
                 <div className="w-full lg:w-5/12 px-4">
                   <div className="relative w-full mb-3">

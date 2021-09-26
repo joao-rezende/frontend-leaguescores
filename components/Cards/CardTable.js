@@ -35,13 +35,14 @@ export default function CardTable({ color, titleTable, columns, lines, Line, onI
                 {columns.map((column, key) => (
                   <th
                     key={key} className={
-                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold " +
+                      (typeof column == "object" ? column.class : "text-left") +
                       (color === "light"
-                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                        : "bg-gray-700 text-white border-gray-600")
+                        ? " bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : " bg-gray-700 text-white border-gray-600")
                     }
                   >
-                    {column}
+                    {typeof column == "string" ? column : column.value}
                   </th>
                 ))}
               </tr>

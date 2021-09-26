@@ -118,13 +118,34 @@ export default function Sidebar() {
                 user &&
                 user.type == 1 &&
                 <li className="items-center hidden">
+                  <Link href="/admin/analysis/add-batch">
+                    <a
+                      href="#"
+                      onClick={() => setCollapseShow("hidden")}
+                      className={
+                        "text-xs py-2 block px-3 font-medium " +
+                        (router.pathname.indexOf("/admin/analysis/add-batch") !== -1
+                          ? "bg-emerald-800 bg-opacity-30 text-emerald-500 hover:bg-emerald-600 rounded-md"
+                          : "text-gray-600 hover:text-gray-400")
+                      }
+                    >
+                      <i className={"fab fa-buffer mr-4 text-lg"}></i>{" "}
+                      <span className={"text-sidebar"}>Análises em Lote</span>
+                    </a>
+                  </Link>
+                </li>
+              }
+              {
+                user &&
+                user.type == 1 &&
+                <li className="items-center hidden">
                   <Link href="/admin/analysis">
                     <a
                       href="#"
                       onClick={() => setCollapseShow("hidden")}
                       className={
                         "text-xs py-2 block px-3 font-medium " +
-                        (router.pathname.indexOf("/admin/analysis") !== -1
+                        (router.pathname.indexOf("/admin/analysis") !== -1 && router.pathname.indexOf("/admin/analysis/add-batch") == -1
                           ? "bg-emerald-800 bg-opacity-30 text-emerald-500 hover:bg-emerald-600 rounded-md"
                           : "text-gray-600 hover:text-gray-400")
                       }

@@ -73,7 +73,7 @@ const BankManagement = ({ userID, bank, labels, metaReal, metaMax, metaMin }) =>
 
   async function listOperations(page = 1) {
     const offset = (page - 1) * 25;
-    const { operations, total, resultTotal } = await api.get(`/api/operations`, { offset });
+    const { operations, total, resultTotal } = await api.get(`/api/operations`, { offset, userID });
     setOperations(operations);
     setLucro(resultTotal ?? 0);
   }
